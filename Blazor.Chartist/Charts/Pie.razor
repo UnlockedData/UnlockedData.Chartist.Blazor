@@ -1,0 +1,49 @@
+﻿@using Microsoft.JSInterop;
+
+@inject IJSRuntime JS
+
+<div @ref="elem" class="ct-chart" @attributes="@ExtraAttributes"></div>
+
+@* Pass 'this' instance as a cascading parameter to descendants in tree 
+<Microsoft.AspNetCore.Components.CascadingValue Value="@this">
+    @ChildContent
+</CascadingValue>
+*@
+
+@code {
+    
+
+    ElementReference elem;
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> ExtraAttributes { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    //[Parameter]
+    //public ChartType Type { get; set; }
+
+    [Parameter]
+    public PieChartData Data { get; set; }
+
+    [Parameter]
+    public PieOptions Options { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (Options == null)
+        {
+            Options = new PieOptions();
+        }
+
+        if (firstRender)
+        {
+
+            await JS.InvokeVoidAsync("bizzyChartist.createChart", "Pie", elem, Data, Options);
+                        
+        }
+
+
+    }
+}
