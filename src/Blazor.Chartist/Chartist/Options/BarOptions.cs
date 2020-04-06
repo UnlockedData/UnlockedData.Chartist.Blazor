@@ -1,6 +1,4 @@
-﻿using Chartist.Blazor.Chartist.Options.ClassNames;
-
-namespace Chartist.Blazor.Chartist.Options
+﻿namespace Chartist.Blazor
 {
     public class BarOptions : ExtendedChartBaseOptions
     {
@@ -11,6 +9,6 @@ namespace Chartist.Blazor.Chartist.Options
         public bool HorizontalBars { get; set; } = false;
 
         public bool DistributeSeries { get; set; } = false;
-        public BarClassNames ClassNames { get; set; } = new BarClassNames();
+        public BarHtmlNames ClassNames { get; set; } = new BarHtmlNames();
     }
 }

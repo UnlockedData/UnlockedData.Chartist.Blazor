@@ -1,4 +1,4 @@
-﻿namespace Chartist.Blazor.Chartist.Options
+﻿namespace Chartist.Blazor
 {
 
     public class AxisOptions

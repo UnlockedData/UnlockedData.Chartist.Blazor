@@ -1,4 +1,4 @@
-﻿namespace Chartist.Blazor.Chartist
+﻿namespace Chartist.Blazor
 {
     public enum ChartType
     {

@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Blazor.Chartist.Demo.Data
+namespace Chartist.Blazor.Demo.Data
 {
     public class WeatherForecastService
     {

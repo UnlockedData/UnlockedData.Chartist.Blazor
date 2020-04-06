@@ -1,6 +1,6 @@
 ﻿@page "/fetchdata"
 
-@using Blazor.Chartist.Demo.Data
+@using Chartist.Blazor.Demo.Data
 @inject WeatherForecastService ForecastService
 
 <h1>Weather forecast</h1>
@@ -37,7 +37,7 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    WeatherForecast[] forecasts;
 
     protected override async Task OnInitializedAsync()
     {

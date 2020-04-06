@@ -1,6 +1,6 @@
 using System;
 
-namespace Blazor.Chartist.Demo.Data
+namespace Chartist.Blazor.Demo.Data
 {
     public class WeatherForecast
     {

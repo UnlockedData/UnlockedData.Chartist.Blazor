@@ -1,6 +1,6 @@
-﻿namespace Chartist.Blazor.Chartist.Options.ClassNames
+﻿namespace Chartist.Blazor
 {
-    public class ExtendedClassNames : ClassNamesBase
+    public class ExtendedHtmlNames : HtmlNamesBase
     {
         public string Chart { get; set; }
         public string LabelGroup { get; set; } = "ct-labels";

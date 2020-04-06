@@ -1,6 +1,6 @@
-﻿namespace Chartist.Blazor.Chartist.Options.ClassNames
+﻿namespace Chartist.Blazor
 {
-    public class PieClassNames : ClassNamesBase
+    public class PieHtmlNames : HtmlNamesBase
     {
 
         public string ChartPie { get; set; } = "ct-chart-pie";

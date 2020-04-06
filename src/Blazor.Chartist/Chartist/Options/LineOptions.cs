@@ -1,7 +1,4 @@
-﻿using Chartist.Blazor.Chartist.Options.ClassNames;
-
-namespace Chartist.Blazor.Chartist.Options
-{
+﻿namespace Chartist.Blazor { 
     public class LineOptions : ExtendedChartBaseOptions
     {
         public bool ShowLine { get; set; } = true;
@@ -11,7 +8,7 @@ namespace Chartist.Blazor.Chartist.Options
         public bool LineSmooth { get; set; } = true;
         public bool FullWidth { get; set; } = false;
 
-        public LineClassNames ClassNames { get; set; } = new LineClassNames();
+        public LineHtmlNames ClassNames { get; set; } = new LineHtmlNames();
         public string LabelDirection { get; set; } = "neutral";
         public bool IgnoreEmptyValues { get; set; } = false;
 

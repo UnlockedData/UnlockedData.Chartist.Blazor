@@ -1,12 +1,12 @@
-﻿namespace Chartist.Blazor.Chartist.Options.ClassNames
+﻿namespace Chartist.Blazor
 {
-    public class BarClassNames : ExtendedClassNames
+    public class BarHtmlNames : ExtendedHtmlNames
     {
 
         public string HorizontalBars { get; set; } = "ct-horizontal-bars";
         public string Bar { get; set; } = "ct-bar";
 
-        public BarClassNames()
+        public BarHtmlNames()
         {
             Chart = "ct-chart-bar";
         }

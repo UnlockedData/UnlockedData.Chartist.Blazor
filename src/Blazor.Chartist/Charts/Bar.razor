@@ -1,18 +1,18 @@
 ﻿@using Microsoft.JSInterop;
-@using BarChartData = Chartist.Blazor.Chartist.Data.ExtendedChartData
+@using BarChartData = ExtendedChartData;
 
 @inject IJSRuntime JS
 
 <div @ref="elem" class="ct-chart" @attributes="@ExtraAttributes"></div>
 
-@* Pass 'this' instance as a cascading parameter to descendants in tree 
-<Microsoft.AspNetCore.Components.CascadingValue Value="@this">
-    @ChildContent
-</CascadingValue>
+@* Pass 'this' instance as a cascading parameter to descendants in tree
+    <Microsoft.AspNetCore.Components.CascadingValue Value="@this">
+        @ChildContent
+    </CascadingValue>
 *@
 
 @code {
-    
+
 
     ElementReference elem;
 
@@ -42,7 +42,7 @@
         {
 
             await JS.InvokeVoidAsync("bizzyChartist.createChart", "Bar", elem, Data, Options);
-                        
+
         }
 
 
