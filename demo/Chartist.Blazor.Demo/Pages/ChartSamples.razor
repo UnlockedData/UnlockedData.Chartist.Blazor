@@ -1,0 +1,50 @@
+﻿@page "/ChartSamples"
+@inject WeatherForecastService ForecastService
+
+<h3>Chart Samples</h3>
+
+<ChartistBar Data="chartData" Options="barOptions"></ChartistBar>
+<ChartistPie Data="pieChartData" Options="pieOptions"></ChartistPie>
+<ChartistLine Data="chartData" Options="lineOptions"></ChartistLine>
+
+
+
+@code {
+
+    private WeatherForecast[] forecasts;
+
+    private ExtendedChartData chartData { get; set; }
+    private PieChartData pieChartData { get; set; }
+
+    private BarOptions barOptions { get; set; } = new BarOptions();
+    private PieOptions pieOptions { get; set; } = new PieOptions();
+    private LineOptions lineOptions { get; set; } = new LineOptions();
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+
+        chartData = new ExtendedChartData()
+        {
+
+            Labels = forecasts.Select(f => f.Date.ToLongDateString()).ToList()
+        };
+
+        chartData.Series.Add(forecasts.Select(f => (double)f.TemperatureC).ToList());
+
+
+
+        pieChartData = new PieChartData()
+        {
+            Labels = forecasts.GroupBy(f => f.Summary).Select(f => f.Key).ToList(),
+            Series = forecasts.GroupBy(f => f.Summary).Select(f => (double)f.Count()).ToList()
+        };
+    }
+
+
+
+
+
+}
