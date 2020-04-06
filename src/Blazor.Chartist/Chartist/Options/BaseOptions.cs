@@ -1,5 +1,5 @@
-﻿namespace Chartist.Blazor.Chartist.Options
-{
+﻿namespace Chartist.Blazor
+{ 
     /// <summary>
     /// the commented out bits are like this because at present, blazor will not allow you to amend serialisation options 
     /// to ignore nulls. This feature is coming in dotnet 5

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Chartist.Blazor.Chartist.Data
+namespace Chartist.Blazor
 {
     public class PieChartData : ChartDataBase
     {

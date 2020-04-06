@@ -1,4 +1,4 @@
-﻿namespace Chartist.Blazor.Chartist.Options
+﻿namespace Chartist.Blazor
 {
     /// <summary>
     /// Total commented out as blazor will not allow serialisation options to be changed. Update it dotnet 5
