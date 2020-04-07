@@ -1,0 +1,6 @@
+﻿[
+  {
+    "outputFile": "../../demo/chartist.blazor.demo/wwwroot/scripts/blazorChartistInterop.js",
+    "inputFile": "wwwroot/blazorChartistInterop.js"
+  }
+]
