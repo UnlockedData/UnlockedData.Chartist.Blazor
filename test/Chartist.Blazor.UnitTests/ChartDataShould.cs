@@ -25,12 +25,12 @@ namespace Chartist.Blazor.UnitTests
             };
 
             sut.Series.Add(
-                new List<double> { 1.0, 2.0, 3.0 });
+                new List<double?> { 1.0, 2.0, 3.0 });
 
 
 
             sut.Series.Add(
-                new List<double> { 4.0, 5.0, 6.0 }
+                new List<double?> { 4.0, 5.0, 6.0 }
                );
 
             //act

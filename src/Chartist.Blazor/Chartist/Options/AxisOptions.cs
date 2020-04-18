@@ -1,68 +1,107 @@
 ﻿namespace Chartist.Blazor
 {
-
+    /// <summary>
+    /// Defines a chart's axis options
+    /// </summary>
     public class AxisOptions
     {
-        public double Offset { get; set; } = 30;
-        public string Position { get; set; } = "end";
+        #region properties
 
+        /// <summary>
+        /// Gets or sets the offset.
+        /// </summary>
+        /// <value>
+        /// The offset.
+        /// </value>
+        public double Offset { get; set; } = 30;
+
+        /// <summary>
+        /// Gets or sets the position.
+        /// </summary>
+        /// <value>
+        /// The position.
+        /// </value>
+        /// <remarks>
+        /// Default value is "end"
+        /// </remarks>
+        public string Position { get; set; } = "end";
+        //TODO: define position enum
+
+        /// <summary>
+        /// Gets or sets the label offset.
+        /// </summary>
+        /// <value>
+        /// The label offset.
+        /// </value>
         public LabelOffset LabelOffset { get; set; } = new LabelOffset();
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to show labels.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if labels should be shown; otherwise, <c>false</c>.
+        /// </value>
         public bool ShowLabel { get; set; } = true;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to show the grid.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the grid should be shown; otherwise, <c>false</c>.
+        /// </value>
         public bool ShowGrid { get; set; } = true;
 
+        /// <summary>
+        /// Gets or sets the scale minimum space.
+        /// </summary>
+        /// <value>
+        /// The scale minimum space.
+        /// </value>
         public double ScaleMinSpace { get; set; } = 30;
 
-
-        //public string? Type { get; set; }
-
+        /// <summary>
+        /// Gets or sets a value indicating whether only integers should be allowed.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if only integers should be allowed; otherwise, <c>false</c>.
+        /// </value>
+        /// <remarks>
+        /// Default value is false;
+        /// </remarks>
         public bool OnlyInteger { get; set; } = false;
 
-        public static AxisOptions Load(string axis)
-        {
-            if (axis == "y")
+        /* TODO: commented out as blazor will not allow serialisation options to be changed. Update it dotnet 5 (breaking change)
+        
+        /// <summary>
+        /// Gets or sets the type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
+        public string? Type { get; set; }
+            
+        */
+
+        #endregion
+
+        #region factory load method
+
+        /// <summary>
+        /// Loads the specified axis with default values.
+        /// </summary>
+        /// <param name="axis">The axis.</param>
+        /// <returns><see cref="AxisOptions"/></returns>
+        public static AxisOptions Load(string axis) =>
+            axis switch
             {
-                return new AxisOptions
+                "y" => new AxisOptions 
                 {
-                    Offset = 30,
-                    Position = "start",
-                    LabelOffset = new LabelOffset(),
-                    ShowLabel = true,
-                    ShowGrid = true,
-                    ScaleMinSpace = 30,
-                    OnlyInteger = false
+                    Position = "start"
+                },
+                _ => new AxisOptions()
+            };
 
-                };
-            }
-            else if (axis == "x")
-            {
-                return new AxisOptions
-                {
-                    Offset = 30,
-                    Position = "end",
-                    LabelOffset = new LabelOffset(),
-                    ShowLabel = true,
-                    ShowGrid = true,
-                    ScaleMinSpace = 30,
-                    OnlyInteger = false
-
-                };
-            }
-            else
-                return new AxisOptions
-                {
-                    Offset = 30,
-                    Position = "end",
-                    LabelOffset = new LabelOffset(),
-                    ShowLabel = true,
-                    ShowGrid = true,
-                    ScaleMinSpace = 30,
-                    OnlyInteger = false
-
-                };
-        }
-
+        #endregion
     }
 
 }
