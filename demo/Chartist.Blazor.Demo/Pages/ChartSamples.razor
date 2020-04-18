@@ -1,50 +1,193 @@
-﻿@page "/ChartSamples"
-@inject WeatherForecastService ForecastService
+﻿@page "/"
 
-<h3>Chart Samples</h3>
+<h1>Chart Samples</h1>
 
-<ChartistBar Data="chartData" Options="barOptions"></ChartistBar>
-<ChartistPie Data="pieChartData" Options="pieOptions"></ChartistPie>
-<ChartistLine Data="chartData" Options="lineOptions"></ChartistLine>
+<h2>Lines</h2>
+
+<h3>Simple Line</h3>
+
+<ChartistLine Data="SimpleLineData" Options="DefaultLineOptions" />
+
+<h3>Holes in Data</h3>
+<ChartistLine Data="HolesLineData" Options="DefaultLineOptions" />
+
+<h3>Only Whole Numbers</h3>
+<ChartistLine Data="OnlyWholeLineData" Options="OnlyWholeLineOptions" />
 
 
+<h3>Line Chart with Area</h3>
+<ChartistLine Data="LineWithAreaData" Options="LineWithAreaOption" />
+
+<h2>Bars</h2>
+
+<h3>Bi-Polar Bar</h3>
+<ChartistBar Data="BiPolarData" Options="BiPolarOptions" />
+
+<h3>Distributed Series</h3>
+<ChartistBar Data="DistributedSeriesData" Options="DistributedSeriesOptions" />
+
+<h3>Overlapping Bars on Mobile</h3>
+<ChartistBar Data="OverlappingBarData" Options="OverlappingBarOptions" />
+
+<h2>Pies</h2>
+
+<h3>Simple Pie</h3>
+<ChartistPie Data="SimplePieData" Options="SimplePieOptions" />
 
 @code {
 
-    private WeatherForecast[] forecasts;
+    private PieChartData SimplePieData { get; set; }
+    private PieOptions SimplePieOptions { get; set; }
 
-    private ExtendedChartData chartData { get; set; }
-    private PieChartData pieChartData { get; set; }
-
-    private BarOptions barOptions { get; set; } = new BarOptions();
-    private PieOptions pieOptions { get; set; } = new PieOptions();
-    private LineOptions lineOptions { get; set; } = new LineOptions();
-
-
-
-    protected override async Task OnInitializedAsync()
+    protected void SimplePie()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        SimplePieOptions = new PieOptions();
 
-        chartData = new ExtendedChartData()
+
+        SimplePieData = new PieChartData()
         {
+            Series = new List<double> { 5, 3, 4 }
+        };
+    }
 
-            Labels = forecasts.Select(f => f.Date.ToLongDateString()).ToList()
+    private ExtendedChartData OverlappingBarData { get; set; }
+    private BarOptions OverlappingBarOptions { get; set; }
+
+    protected void OverlappingBar()
+    {
+        OverlappingBarOptions = new BarOptions()
+        { SeriesBarDistance = 10 }
+        ;
+
+        OverlappingBarData = new ExtendedChartData()
+        {
+            Labels = new List<string> { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }
         };
 
-        chartData.Series.Add(forecasts.Select(f => (double)f.TemperatureC).ToList());
+        OverlappingBarData.Series.Add(new List<double?> { 5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8 });
+        OverlappingBarData.Series.Add(new List<double?> { 3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4 });
 
 
+    }
 
-        pieChartData = new PieChartData()
+    private ExtendedChartData SimpleLineData { get; set; }
+    private LineOptions DefaultLineOptions { get; set; } = new LineOptions();
+
+    protected void SimpleLine()
+    {
+        SimpleLineData = new ExtendedChartData()
         {
-            Labels = forecasts.GroupBy(f => f.Summary).Select(f => f.Key).ToList(),
-            Series = forecasts.GroupBy(f => f.Summary).Select(f => (double)f.Count()).ToList()
+
+            Labels = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
+
         };
+
+        SimpleLineData.Series.Add(new List<double?> { 12, 9, 7, 8, 5 });
+        SimpleLineData.Series.Add(new List<double?> { 2, 1, 3.5, 7, 3 });
+        SimpleLineData.Series.Add(new List<double?> { 1, 3, 4, 5, 6 });
     }
 
 
 
+    private ExtendedChartData HolesLineData { get; set; }
 
+    protected void HolesLine()
+    {
+        HolesLineData = new ExtendedChartData()
+        {
+
+            Labels = (new List<double> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }).ConvertAll(i => i.ToString())
+
+        };
+
+        HolesLineData.Series.Add(new List<double?> { 5, 5, 10, 8, 7, 5, 4, null, null, null, 10, 10, 7, 8, 6, 9 });
+        HolesLineData.Series.Add(new List<double?> { 10, 15, null, 12, null, 10, 12, 15, null, null, 12, null, 14, null, null, null });
+        HolesLineData.Series.Add(new List<double?> { null, null, null, null, 3, 4, 1, 3, 4, 6, 7, 9, 5, null, null, null });
+
+    }
+
+
+
+    private ExtendedChartData OnlyWholeLineData { get; set; }
+    private LineOptions OnlyWholeLineOptions { get; set; } = new LineOptions();
+
+    protected void OnlyWholeLine()
+    {
+        OnlyWholeLineData = new ExtendedChartData()
+        {
+            Labels = (new List<double> { 1, 2, 3, 4, 5, 6, 7, 8 }).ConvertAll(i => i.ToString())
+        };
+
+        OnlyWholeLineData.Series.Add(new List<double?> { 1, 2, 3, 1, -2, 0, 1, 0 });
+        OnlyWholeLineData.Series.Add(new List<double?> { -2, -1, -2, -1, -3, -1, -2, -1 });
+        OnlyWholeLineData.Series.Add(new List<double?> { 0, 0, 0, 1, 2, 3, 2, 1 });
+        OnlyWholeLineData.Series.Add(new List<double?> { 3, 2, 1, 0.5, 1, 0, -1, -3 });
+
+        OnlyWholeLineOptions.AxisY.OnlyInteger = true;
+    }
+
+
+    private ExtendedChartData LineWithAreaData { get; set; }
+    private LineOptions LineWithAreaOption { get; set; } = new LineOptions() { ShowArea = true };
+
+    protected void LineWithArea()
+    {
+        LineWithAreaData = new ExtendedChartData()
+        {
+            Labels = (new List<double> { 1, 2, 3, 4, 5, 6, 7, 8 }).ConvertAll(i => i.ToString())
+
+        };
+
+        LineWithAreaData.Series.Add(new List<double?> { 5, 9, 7, 8, 5, 3, 5, 4 });
+
+    }
+
+    private ExtendedChartData BiPolarData { get; set; }
+    private BarOptions BiPolarOptions { get; set; }
+
+    protected void BiPolar()
+    {
+        BiPolarOptions = new BarOptions();
+        BiPolarData = new ExtendedChartData()
+        {
+            Labels = new List<string> { "W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "W10" }
+        };
+
+        BiPolarData.Series.Add(new List<double?> { 1, 2, 4, 8, 6, -2, -1, -4, -6, -2 });
+    }
+
+
+    private ExtendedChartData DistributedSeriesData { get; set; }
+    private BarOptions DistributedSeriesOptions { get; set; }
+
+
+    protected void DistributedSeries()
+    {
+
+        DistributedSeriesOptions = new BarOptions() { DistributeSeries = false };
+        DistributedSeriesData = new ExtendedChartData()
+        {
+            Labels = new List<string> { "XS", "S", "M", "L", "XL", "XXL", "XXXL" }
+        };
+
+        DistributedSeriesData.Series.Add(new List<double?> { 20, 60, 120, 200, 180, 20, 10 });
+
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+
+        SimpleLine();
+        HolesLine();
+        OnlyWholeLine();
+        LineWithArea();
+        BiPolar();
+        DistributedSeries();
+        OverlappingBar();
+        SimplePie();
+
+    }
 
 }
