@@ -40,7 +40,7 @@ jobs:
     - name: Create Package Dir
       run: mkdir ${{ github.workspace }}/package
     - name: Pack
-      run: dotnet pack --source "src/**/*.csproj" --no-build -c Release --output "${{ github.workspace }}/package"
+      run: dotnet pack Chartist.Blazor.sln --no-build -c Release --output "${{ github.workspace }}/package"
     - name: Upload Artifacts
       uses: actions/upload-artifact@v1
       with:
