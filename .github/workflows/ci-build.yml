@@ -27,7 +27,7 @@ jobs:
       with:
         dotnet-version: 3.1.102
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore Chartist.Blazor.sln
     - name: ngbv set version
       uses: aarnott/nbgv@v0.3
       with:
