@@ -2,12 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-
     <IsPackable>false</IsPackable>
-
-    <AssemblyName>Chartist.Blazor.Tests</AssemblyName>
-
-    <RootNamespace>Chartist.Blazor.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Blazor.Chartist\Chartist.Blazor.csproj" />
+    <ProjectReference Include="..\..\src\Chartist.Blazor\Chartist.Blazor.csproj" />
   </ItemGroup>
-
+  
 </Project>

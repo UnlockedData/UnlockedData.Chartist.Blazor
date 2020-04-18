@@ -1,0 +1,13 @@
+{
+  "version": "1.0-prerelease",
+    "assemblyVersion": {
+      "precision": "revision"
+    },
+    "publicReleaseRefSpec": [
+      "^refs/heads/master$",
+      "^refs/heads/rel/v\\d+\\.\\d+"
+    ],
+    "nugetPackageVersion": {
+      "semVer": 2
+    }
+  }
