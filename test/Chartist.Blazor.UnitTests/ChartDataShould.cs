@@ -7,7 +7,7 @@ using Xunit;
 /// These tests are mainly in place to help get some clarity over what and how is passed
 /// to razor components
 /// </summary>
-namespace Chartist.Blazor.Tests
+namespace Chartist.Blazor.UnitTests
 {
     public class ChartDataShould
     {
@@ -37,8 +37,7 @@ namespace Chartist.Blazor.Tests
             var compare = JsonSerializer.Serialize(sut);
 
             //assert
-            Assert.True(compare == "{\"Labels\":[\"test 1\",\"test 2\",\"test 3\"],\"Series\":[[1,2,3],[4,5,6]]}");
-            //Assert.True(sut.Labels.ToString() == );
+            Assert.True(compare == "{\"Series\":[[1,2,3],[4,5,6]],\"Labels\":[\"test 1\",\"test 2\",\"test 3\"]}");
         }
     }
 }
