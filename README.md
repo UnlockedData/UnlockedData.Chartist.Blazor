@@ -3,7 +3,7 @@ A Blazor implementation of ChartistJS
 
 ![ci-build](https://github.com/sxotney/Chartist.Blazor/workflows/ci-build/badge.svg)
 
-Influenced by mariusmuntean's [ChartJS.Blazor](https://github.com/mariusmuntean/ChartJs.Blazor) and [Steve Sanderson's demo](https://github.com/SteveSandersonMS/presentation-2020-01-NdcBlazorComponentLibraries) and of course [ChartistJS itself] (https://github.com/gionkunz/chartist-js)
+Influenced by mariusmuntean's [ChartJS.Blazor](https://github.com/mariusmuntean/ChartJs.Blazor) and [Steve Sanderson's demo](https://github.com/SteveSandersonMS/presentation-2020-01-NdcBlazorComponentLibraries) and of course [ChartistJS itself](https://github.com/gionkunz/chartist-js)
 
 ## Demo
 
