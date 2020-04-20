@@ -38,7 +38,7 @@ For client-side and server-side Blazor - add script section to index.html or _Ho
 
 ### Gotchas
 
-- Due to serialisation configuration missing current release of Blazor, some chart options are not available and will be set to whatever the default value in the JS library is
+- Due to serialisation configuration missing from the current release of Blazor (3.2), some chart options are not available and will be set to whatever the default value in the JS library is
 
 ### Bug Fixes
 
