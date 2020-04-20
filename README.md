@@ -11,10 +11,6 @@ Influenced by mariusmuntean's [ChartJS.Blazor](https://github.com/mariusmuntean/
 
 ## Installation
 
-TBD
-
-<!--
-
 To Install 
 
 ```ps1
@@ -32,4 +28,18 @@ For client-side and server-side Blazor - add script section to index.html or _Ho
     <script src="_content/Chartist.Blazor/chartist.min.js"></script>
     <script src="_content/Chartist.Blazor/blazorChartistInterop.js"></script>
 ```
--->
+
+
+## Release Notes
+
+### What's New
+
+- This library allows you to add line, bar and pie chart components to your Blazor apps
+
+### Gotchas
+
+- Due to serialisation configuration missing from the current release of Blazor (3.2), some chart options are not available and will be set to whatever the default value in the JS library is
+
+### Bug Fixes
+
+- None for this initial release
