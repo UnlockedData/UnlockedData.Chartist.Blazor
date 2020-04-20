@@ -25,7 +25,7 @@ For client-side and server-side Blazor - add script section to index.html or _Ho
 
 ```xml
     <link href="_content/Chartist.Blazor/chartist.min.css" rel="stylesheet" />
-    <script src="_content/Chartist.Blazor/chartist.min.js"></script>
+    <script src="_content/Chartist.Blazor/chartist.js"></script>
     <script src="_content/Chartist.Blazor/blazorChartistInterop.js"></script>
 ```
 
