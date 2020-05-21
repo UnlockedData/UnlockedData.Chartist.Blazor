@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Chartist.Blazor
+namespace Chartist.Blazor.Core.Data
 {
     /// <summary>
-    /// Defines the required extended chart data for the relevant chart types
+    /// Defines the data required for a Pie chart.
     /// </summary>
     /// <seealso cref="Chartist.Blazor.ChartDataBase" />
-    public class ExtendedChartData : ChartDataBase
+    public class PieChartData : ChartDataBase
     {
         /// <summary>
         /// Gets or sets the series.
@@ -14,6 +14,6 @@ namespace Chartist.Blazor
         /// <value>
         /// The series.
         /// </value>
-        public List<List<double?>> Series { get; set; } = new List<List<double?>>();
+        public List<double> Series { get; set; } = new List<double>();
     }
 }

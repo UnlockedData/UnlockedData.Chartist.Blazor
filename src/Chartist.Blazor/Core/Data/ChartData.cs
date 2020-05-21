@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Chartist.Blazor 
+namespace Chartist.Blazor.Core.Data
 {
     /// <summary>
     /// Defines the basic chart data for all chart types
@@ -14,5 +14,6 @@ namespace Chartist.Blazor
         /// The labels.
         /// </value>
         public List<string> Labels { get; set; }
+        
     }
 }
