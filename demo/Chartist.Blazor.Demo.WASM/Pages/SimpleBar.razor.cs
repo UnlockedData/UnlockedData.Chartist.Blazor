@@ -12,8 +12,8 @@ namespace Chartist.Blazor.Demo.WASM.Pages
 {
     public partial class SimpleBar : ComponentBase
     {
-        [Inject]
-        private IJSRuntime Js { get; set; }
+        //[Inject]
+        //private IJSRuntime Js { get; set; }
         
         private ExtendedChartData BiPolarData { get; set; }        
        

@@ -3414,8 +3414,8 @@
 
                 // Write attributes to series group element. If series name or meta is undefined the attributes will not be written
                 seriesElement.attr({
-                    'ct:series-name': series.name,
-                    'ct:meta': Chartist.serialize(series.meta)
+                    'ct-series-name': series.name,
+                    'ct-meta': Chartist.serialize(series.meta)
                 });
 
                 // Use series class from series data or if not set generate one
@@ -3467,7 +3467,7 @@
                             y2: pathElement.y
                         }, options.classNames.point).attr({
                             'ct:value': [pathElement.data.value.x, pathElement.data.value.y].filter(Chartist.isNumeric).join(','),
-                            'ct:meta': Chartist.serialize(pathElement.data.meta)
+                            'ct-meta': Chartist.serialize(pathElement.data.meta)
                         });
 
                         this.eventEmitter.emit('draw', {
@@ -3918,7 +3918,7 @@
                 var biPol = seriesIndex - (data.raw.series.length - 1) / 2;
                 // Half of the period width between vertical grid lines used to position bars
                 var periodHalfLength;
-                // Current series SVG element
+                // Current series SVG elementct-meta
                 var seriesElement;
 
                 // We need to set periodHalfLength based on some options combinations
@@ -3940,8 +3940,8 @@
 
                 // Write attributes to series group element. If series name or meta is undefined the attributes will not be written
                 seriesElement.attr({
-                    'ct:series-name': series.name,
-                    'ct:meta': Chartist.serialize(series.meta)
+                    'ct-series-name': series.name,
+                    'ct-meta': Chartist.serialize(series.meta)
                 });
 
                 // Use series class from series data or if not set generate one
@@ -4034,7 +4034,7 @@
                     // Create bar element
                     bar = seriesElement.elem('line', positions, options.classNames.bar).attr({
                         'ct:value': [value.x, value.y].filter(Chartist.isNumeric).join(','),
-                        'ct:meta': Chartist.serialize(metaData)
+                        'ct-meta': Chartist.serialize(metaData)
                     });
 
                     this.eventEmitter.emit('draw', Chartist.extend({
@@ -4280,7 +4280,7 @@
 
                 // If the series is an object and contains a name or meta data we add a custom attribute
                 seriesGroups[index].attr({
-                    'ct:series-name': series.name
+                    'ct-series-name': series.name
                 });
 
                 // Use series class from series data or if not set generate one
@@ -4340,7 +4340,7 @@
                 // Adding the pie series value to the path
                 pathElement.attr({
                     'ct:value': data.normalized.series[index],
-                    'ct:meta': Chartist.serialize(series.meta)
+                    'ct-meta': Chartist.serialize(series.meta)
                 });
 
                 // If this is a donut, we add the stroke-width as style attribute
@@ -4472,8 +4472,8 @@
          *
          * @example
          * // Overriding the class names for individual series as well as a name and meta data.
-         * // The name will be written as ct:series-name attribute and the meta data will be serialized and written
-         * // to a ct:meta attribute.
+         * // The name will be written as ct-series-name attribute and the meta data will be serialized and written
+         * // to a ct-meta attribute.
          * new Chartist.Pie('.ct-chart', {
          *   series: [{
          *     value: 20,
