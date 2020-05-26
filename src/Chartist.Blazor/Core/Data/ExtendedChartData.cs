@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Chartist.Blazor.Chartist.Data;
 
 namespace Chartist.Blazor.Core.Data
 {

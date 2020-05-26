@@ -13,7 +13,7 @@ class BlazorChartist {
         switch (type) {
             case "Bar":
                 chart = await Chartist.Bar(elem, data, options);
-                bindEvents('ct-bar'); 
+                bindEvents('ct-bar');
                 break;
             case "Pie":
                 chart = await Chartist.Pie(elem, data, options);
@@ -25,11 +25,11 @@ class BlazorChartist {
 
 
 
-        chart.on('draw', function (data) {           
+        chart.on('draw', function (data) {
 
             console.log(data);
 
-            
+
         });
 
         chart.on('created', function (data) {

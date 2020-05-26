@@ -1,6 +1,6 @@
 ﻿[
-  {
-    "outputFile": "../../demo/chartist.blazor.demo/wwwroot/scripts/blazorChartistInterop.js",
-    "inputFile": "wwwroot/blazorChartistInterop.js"
-  }
+  //{
+  //  "inputFile": "wwwroot/blazorChartistInterop.js",
+  //  "outputFile": "../../demo/chartist.blazor.demo.wasm/wwwroot/scripts/blazorChartistInterop.js"
+  //}
 ]

@@ -2,10 +2,10 @@ namespace Chartist.Blazor.Core.Data
 {
     public class SeriesPoint
     {
-        public double? X = null;
+        public double? X { get; set; } = null;
 
-        public double? Y;
+        public double? Y { get; set; } = null;
 
-        public string? Meta;
+        public string Meta { get; set; }
     }
 }

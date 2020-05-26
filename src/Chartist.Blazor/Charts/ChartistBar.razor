@@ -1,5 +1,5 @@
 ﻿@using Microsoft.JSInterop;
-@using BarChartData = ExtendedChartData;
+@using BarChartData = Chartist.Blazor.Core.Data.ExtendedChartData;
 
 @inject IJSRuntime JS
 
@@ -20,7 +20,7 @@
     public Dictionary<string, object> ExtraAttributes { get; set; }
 
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public RenderFragment ChildContent { get; set; } 
 
     //[Parameter]
     //public ChartType Type { get; set; }
@@ -42,9 +42,11 @@
         {
 
             await JS.InvokeVoidAsync("bizzyChartist.createChart", "Bar", elem, Data, Options);
+            //await JS.InvokeVoidAsync("bizzyChartist.bindEvents", Options.ClassNames.Bar);
 
         }
 
 
     }
 }
+ 

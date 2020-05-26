@@ -1,0 +1,41 @@
+﻿@page "/SimpleLine"
+
+
+<h3>Simple Line</h3>
+
+<ChartistLine Data="SimpleLineData" Options="DefaultLineOptions" />
+
+
+
+@code {
+
+    private ExtendedChartData SimpleLineData { get; set; }
+    private LineOptions DefaultLineOptions { get; set; } = new LineOptions();
+
+    protected override void OnInitialized()
+    {
+        SimpleLineData = new Core.Data.ExtendedChartData()
+        {
+
+            Labels = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
+
+        };
+
+
+        var series = new Series();
+        series.Data.Add(new SeriesPoint { X = null, Y = 12, Meta = null });
+        series.Data.Add(new SeriesPoint { X = null, Y = 9, Meta = null });
+        series.Data.Add(new SeriesPoint { X = null, Y = 7, Meta = null });
+        series.Data.Add(new SeriesPoint { X = null, Y = 8, Meta = null });
+        series.Data.Add(new SeriesPoint { X = null, Y = 5, Meta = null });
+        SimpleLineData.Series.Add(series);
+
+    }
+
+
+
+
+
+
+
+}
