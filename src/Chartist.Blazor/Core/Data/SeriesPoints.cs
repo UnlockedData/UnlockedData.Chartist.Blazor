@@ -1,4 +1,4 @@
-namespace Chartist.Blazor.Core.Data
+﻿namespace Chartist.Blazor.Core.Data
 {
     public class SeriesPoint
     {
@@ -7,5 +7,12 @@ namespace Chartist.Blazor.Core.Data
         public double? Y { get; set; } = null;
 
         public string Meta { get; set; }
+        //if there is a horizontal bars option set, the values need to be swapped
+        public void SwapPoints()
+        {
+            var holder = X;
+            X = Y;
+            Y = holder;
+        }
     }
 }

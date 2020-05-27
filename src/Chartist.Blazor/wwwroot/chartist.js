@@ -3466,8 +3466,8 @@
                             x2: pathElement.x + 0.01,
                             y2: pathElement.y
                         }, options.classNames.point).attr({
-                            'ct:value': [pathElement.data.value.x, pathElement.data.value.y].filter(Chartist.isNumeric).join(','),
-                            'ct:meta': Chartist.serialize(pathElement.data.meta)
+                            'ct-value': [pathElement.data.value.x, pathElement.data.value.y].filter(Chartist.isNumeric).join(','),
+                            'ct-meta': Chartist.serialize(pathElement.data.meta)
                         });
 
                         this.eventEmitter.emit('draw', {
@@ -4033,8 +4033,8 @@
 
                     // Create bar element
                     bar = seriesElement.elem('line', positions, options.classNames.bar).attr({
-                        'ct:value': [value.x, value.y].filter(Chartist.isNumeric).join(','),
-                        'ct:meta': Chartist.serialize(metaData)
+                        'ct-value': [value.x, value.y].filter(Chartist.isNumeric).join(','),
+                        'ct-meta': Chartist.serialize(metaData)
                     });
 
                     this.eventEmitter.emit('draw', Chartist.extend({
@@ -4339,8 +4339,8 @@
 
                 // Adding the pie series value to the path
                 pathElement.attr({
-                    'ct:value': data.normalized.series[index],
-                    'ct:meta': Chartist.serialize(series.meta)
+                    'ct-value': data.normalized.series[index],
+                    'ct-meta': Chartist.serialize(series.meta)
                 });
 
                 // If this is a donut, we add the stroke-width as style attribute

@@ -1,19 +1,11 @@
-﻿function bindEvents(className) {
-    var elems = document.querySelectorAll('.' + className);
-    elems.forEach(function (elem, i) {
-        elem.addEventListener('click', (e) => { console.log(e); })
-    });
-};
-
-class BlazorChartist {
+﻿class BlazorChartist {
 
 
     async createChart(type, elem, data, options) {
         var chart;
         switch (type) {
             case "Bar":
-                chart = await Chartist.Bar(elem, data, options);
-                bindEvents('ct-bar'); 
+                chart = await Chartist.Bar(elem, data, options); 
                 break;
             case "Pie":
                 chart = await Chartist.Pie(elem, data, options);
@@ -27,7 +19,8 @@ class BlazorChartist {
 
         chart.on('draw', function (data) {           
 
-            console.log(data);
+            //console.log(data);
+            
 
             
         });
@@ -35,6 +28,11 @@ class BlazorChartist {
         chart.on('created', function (data) {
 
             console.log(data);
+            document.querySelectorAll('.ct-bar').forEach(function (item) {
+                item.addEventListener('click', function (e) {
+                    example(e.target.getAttribute("ct-meta"));
+                });
+            });
 
         });
         console.log(type + " created by chartistjs");
@@ -45,6 +43,9 @@ class BlazorChartist {
     };
 };
 
-
+window.example = function (e) {
+    DotNet.invokeMethodAsync('Chartist.Blazor','ReturnString',e)
+            .then(data => console.log(data));
+    }
 
 window.bizzyChartist = new BlazorChartist();
