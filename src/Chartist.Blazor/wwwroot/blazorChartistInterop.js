@@ -30,7 +30,9 @@
             console.log(data);
             document.querySelectorAll('.ct-bar').forEach(function (item) {
                 item.addEventListener('click', function (e) {
-                    example(e.target.getAttribute("ct-meta"));
+                    console.log(e);
+                    exampleStatic(e.target.getAttribute("ct-meta"));
+                    //exampleInstance(e.target.getAttribute("ct-meta"));
                 });
             });
 
@@ -43,9 +45,15 @@
     };
 };
 
-window.example = function (e) {
+window.exampleStatic = function (e) {
     DotNet.invokeMethodAsync('Chartist.Blazor','ReturnString',e)
             .then(data => console.log(data));
-    }
+}
+
+window.exampleInstance = function (e, dotnetInstance) {
+    dotnetInstance.invokeMethodAsync('ReturnString', e)
+        .then(data => console.log(data));
+
+}
 
 window.bizzyChartist = new BlazorChartist();

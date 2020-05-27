@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Chartist.Blazor.Core.Data;
+using Chartist.Blazor.Services;
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -14,6 +15,9 @@ namespace Chartist.Blazor.Demo.WASM.Pages
     {
         //[Inject]
         //private IJSRuntime Js { get; set; }
+
+        //[Inject]
+        //private DataInteractivityService dataInteractivityService { get; set; }
         
         private ExtendedChartData BiPolarData { get; set; }        
        
@@ -21,6 +25,11 @@ namespace Chartist.Blazor.Demo.WASM.Pages
 
         protected override void OnInitialized()
         {
+            DataInteractivityServiceStatic.ClickEventHandler += (o, e) =>
+            {
+                Console.WriteLine("clicked a simple bar when you clicked" + e);
+            };
+
             BiPolarData = new Core.Data.ExtendedChartData()
             {
 

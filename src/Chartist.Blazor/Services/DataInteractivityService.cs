@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,15 +11,29 @@ using Microsoft.JSInterop;
 
 namespace Chartist.Blazor.Services
 {
-    public static class DataInteractivityService
+    public static class DataInteractivityServiceStatic
     {
 
         [JSInvokable]
-        public static Task<string> ReturnString(string e)
+        public static Task ReturnString(string e)
         {
-            var result = "You have reached the offices of Dotnet, we're not fucking here!";
-            var resuly = "hey, you clicked me and my info says I'm a "  + e;
-            return Task.FromResult(resuly);
+           
+            ClickEventHandler?.Invoke(null, e);
+            return Task.CompletedTask;
+
+        }
+
+        public static EventHandler<string> ClickEventHandler;
+    }
+
+    public class DataInteractivityService
+    {
+        [JSInvokable]
+        public string ReturnString(string e)
+        {
+            
+            return "hey, you clicked me and my instance says I'm a " + e;
+            
 
         }
     }

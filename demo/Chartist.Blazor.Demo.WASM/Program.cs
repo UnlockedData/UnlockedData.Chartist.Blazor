@@ -16,7 +16,7 @@ namespace Chartist.Blazor.Demo.WASM
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            //builder.Services.AddSingleton<DataInteractivityService>();
+            builder.Services.AddScoped<DataInteractivityService>();
             builder.Services.AddSingleton(new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             await builder.Build().RunAsync();
