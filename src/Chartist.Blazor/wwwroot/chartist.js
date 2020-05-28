@@ -3414,8 +3414,8 @@
 
                 // Write attributes to series group element. If series name or meta is undefined the attributes will not be written
                 seriesElement.attr({
-                    'ct:series-name': series.name,
-                    'ct:meta': Chartist.serialize(series.meta)
+                    'ct-series-name': series.name,
+                    'ct-meta': Chartist.serialize(series.meta)
                 });
 
                 // Use series class from series data or if not set generate one
@@ -3940,8 +3940,8 @@
 
                 // Write attributes to series group element. If series name or meta is undefined the attributes will not be written
                 seriesElement.attr({
-                    'ct:series-name': series.name,
-                    'ct:meta': Chartist.serialize(series.meta)
+                    'ct-series-name': series.name,
+                    'ct-meta': Chartist.serialize(series.meta)
                 });
 
                 // Use series class from series data or if not set generate one
@@ -4280,7 +4280,7 @@
 
                 // If the series is an object and contains a name or meta data we add a custom attribute
                 seriesGroups[index].attr({
-                    'ct:series-name': series.name
+                    'ct-series-name': series.name
                 });
 
                 // Use series class from series data or if not set generate one
@@ -4472,8 +4472,8 @@
          *
          * @example
          * // Overriding the class names for individual series as well as a name and meta data.
-         * // The name will be written as ct:series-name attribute and the meta data will be serialized and written
-         * // to a ct:meta attribute.
+         * // The name will be written as ct-series-name attribute and the meta data will be serialized and written
+         * // to a ct-meta attribute.
          * new Chartist.Pie('.ct-chart', {
          *   series: [{
          *     value: 20,

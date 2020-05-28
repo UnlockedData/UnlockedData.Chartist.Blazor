@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 
 namespace Chartist.Blazor.Services
@@ -14,12 +14,12 @@ namespace Chartist.Blazor.Services
     /// </summary>
     public static class DomEventRoutingService
     {
-        public static event EventHandler<dynamic> DataPointClicked;
-        public static event EventHandler<dynamic> DataPointEntered;
-        public static event EventHandler<dynamic> DataPointExited;
+        public static event EventHandler<ChartistMouseEventArgs> DataPointClicked;
+        public static event EventHandler<ChartistMouseEventArgs> DataPointEntered;
+        public static event EventHandler<ChartistMouseEventArgs> DataPointExited;
 
         [JSInvokable]
-        public static void DomDataPointClicked(dynamic args)
+        public static void DomDataPointClicked(ChartistMouseEventArgs args)
         {
 #if DEBUG
             Console.WriteLine("Clicked");
@@ -30,7 +30,7 @@ namespace Chartist.Blazor.Services
         }
 
         [JSInvokable]
-        public static void DomDataPointEntered(dynamic args)
+        public static void DomDataPointEntered(ChartistMouseEventArgs args)
         {
 #if DEBUG
             Console.WriteLine("entered");
@@ -41,7 +41,7 @@ namespace Chartist.Blazor.Services
         }
 
         [JSInvokable]
-        public static void DomDataPointExited(dynamic args)
+        public static void DomDataPointExited(ChartistMouseEventArgs args)
         {
 #if DEBUG
             Console.WriteLine("exited");

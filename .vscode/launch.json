@@ -5,32 +5,25 @@
    "version": "0.2.0",
    "configurations": [
         {
-            "name": ".NET Core Launch (web)",
+            "name": ".NET Core Launch (Blazor Standalone)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
-            // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/demo/Chartist.Blazor.Demo/bin/Debug/netcoreapp3.0/Chartist.Blazor.Demo.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/demo/Chartist.Blazor.Demo",
-            "stopAtEntry": false,
-            // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
-            },
+            "program": "dotnet",
+            "args": ["run"],
+            "cwd": "${workspaceFolder}/demo/Chartist.Blazor.Demo.WASM",
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
             }
         },
         {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickProcess}"
+            "name": ".NET Core Debug Blazor Web Assembly in Chrome",
+            "type": "pwa-chrome",
+            "request": "launch",
+            "timeout": 30000,
+            // If you have changed the default port / launch URL make sure to update the expectation below
+            "url": "https://localhost:5001",
+            "webRoot": "${workspaceFolder}/demo/Chartist.Blazor.Demo.WASM",
+            "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
         }
     ]
 }

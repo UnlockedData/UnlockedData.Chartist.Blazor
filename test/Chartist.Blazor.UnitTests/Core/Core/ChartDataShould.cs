@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json;
 using Xunit;
 using Chartist.Blazor.Core.Data;
+using System.Reflection.Emit;
 /// <summary>
 /// These tests are mainly in place to help get some clarity over what and how is passed
 /// to razor components
@@ -18,11 +19,11 @@ namespace Chartist.Blazor.Core.Data.UnitTests
             //arrange
             var series = new Series();
             series.Data = new List<SeriesPoint>{
-                new SeriesPoint(){Y=2,Meta="Clickable"},
-                new SeriesPoint(){Y=3,Meta="Clickable"},
-                new SeriesPoint(){Y=4,Meta="Clickable"},
-                new SeriesPoint(){Y=6,Meta="Clickable"},
-                new SeriesPoint(){Y=1,Meta="Clickable"},
+                new SeriesPoint(){Y=2,Meta= new PointMetaInfo{Label="Clickable"} },
+                new SeriesPoint(){Y=3,Meta=new PointMetaInfo{Label="Clickable"} },
+                new SeriesPoint(){Y=4,Meta=new PointMetaInfo{Label="Clickable"} },
+                new SeriesPoint(){Y=6,Meta=new PointMetaInfo{Label="Clickable"} },
+                new SeriesPoint(){Y=1,Meta=new PointMetaInfo{Label="Clickable"} }
             };
             series.Name = "Single";
             series.Meta = "MetaTest";

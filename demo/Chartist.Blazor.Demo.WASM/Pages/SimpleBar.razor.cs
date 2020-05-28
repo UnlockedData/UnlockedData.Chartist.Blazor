@@ -32,11 +32,11 @@ namespace Chartist.Blazor.Demo.WASM.Pages
 
 
             var series = new Series();
-            series.Data.Add(new SeriesPoint { X = null, Y = 12, Meta = "Monday" });
-            series.Data.Add(new SeriesPoint { X = null, Y = 9, Meta = "Tuesday" });
-            series.Data.Add(new SeriesPoint { X = null, Y = 7, Meta = "Wednesday" });
-            series.Data.Add(new SeriesPoint { X = null, Y = 8, Meta = "Thursday" });
-            series.Data.Add(new SeriesPoint { X = null, Y = 5, Meta = "Friday" });
+            series.Data.Add(new SeriesPoint { X = null, Y = 12, Meta = new PointMetaInfo { Label = "Monday"} });
+            series.Data.Add(new SeriesPoint { X = null, Y = 9, Meta = new PointMetaInfo{ Label = "Tuesday"}});
+            series.Data.Add(new SeriesPoint { X = null, Y = 7, Meta = new PointMetaInfo{ Label = "Wednesday"} });
+            series.Data.Add(new SeriesPoint { X = null, Y = 8, Meta = new PointMetaInfo{ Label = "Thursday"} });
+            series.Data.Add(new SeriesPoint { X = null, Y = 5, Meta = new PointMetaInfo{ Label = "Friday"} });
             BiPolarData.Series.Add(series);
 
         }
@@ -45,7 +45,7 @@ namespace Chartist.Blazor.Demo.WASM.Pages
         {
             DomEventRoutingService.DataPointClicked += (o, e) =>
             {
-                Console.WriteLine("clicked a simple bar when you clicked");
+                Console.WriteLine("clicked a simple bar when you clicked me " + e.PointMetaInfo.Id + " " + e.PointMetaInfo.Label);
             };
         }
 

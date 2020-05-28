@@ -1,5 +1,7 @@
-using Chartist.Blazor.Core.Data;
+﻿using Chartist.Blazor.Core.Data;
 using Xunit;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Chartist.Blazor.UnitTests.Core.Core.Data
 {
@@ -11,10 +13,10 @@ namespace Chartist.Blazor.UnitTests.Core.Core.Data
         //Given
         var sut = new SeriesPoint(){
             Y=1.00,
-            Meta="ClickMe"
+            Meta= new PointMetaInfo{Label="label"}
         };
-        //When
-        var compare = sut.ToString();
+            //When
+            var compare = JsonSerializer.Serialize(sut);
         //Then
 
         }
