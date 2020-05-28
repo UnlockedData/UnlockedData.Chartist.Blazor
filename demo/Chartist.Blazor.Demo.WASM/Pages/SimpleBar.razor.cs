@@ -13,11 +13,7 @@ namespace Chartist.Blazor.Demo.WASM.Pages
 {
     public partial class SimpleBar : ComponentBase
     {
-        //[Inject]
-        //private IJSRuntime Js { get; set; }
-
-        //[Inject]
-        //private DataInteractivityService dataInteractivityService { get; set; }
+        
         
         private ExtendedChartData BiPolarData { get; set; }        
        
@@ -25,10 +21,7 @@ namespace Chartist.Blazor.Demo.WASM.Pages
 
         protected override void OnInitialized()
         {
-            DataInteractivityServiceStatic.ClickEventHandler += (o, e) =>
-            {
-                Console.WriteLine("clicked a simple bar when you clicked" + e);
-            };
+            
 
             BiPolarData = new Core.Data.ExtendedChartData()
             {
@@ -48,15 +41,14 @@ namespace Chartist.Blazor.Demo.WASM.Pages
 
         }
 
-        //protected override async Task OnAfterRenderAsync(bool firstRender)
-        //{
-        //    if (firstRender)
-        //    {
-        //        //bind events to datapoints function
-                
-        //    }
+        protected override void OnAfterRender(bool firstRender)
+        {
+            DomEventRoutingService.DataPointClicked += (o, e) =>
+            {
+                Console.WriteLine("clicked a simple bar when you clicked");
+            };
+        }
 
-        //}
 
 
     }

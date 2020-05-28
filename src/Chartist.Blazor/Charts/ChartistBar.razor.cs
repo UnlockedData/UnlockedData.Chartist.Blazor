@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
+using Chartist.Blazor.Services;
+
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -35,10 +37,13 @@ namespace Chartist.Blazor.Charts
         [Parameter]
         public BarOptions Options { get; set; }
 
-        
+               
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+
+            
+
             if (Options == null)
             {
                 Options = new BarOptions();
@@ -63,6 +68,8 @@ namespace Chartist.Blazor.Charts
 
 
             }
+
+
 
 
         }
