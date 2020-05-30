@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-
-using Chartist.Blazor.Services;
-
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -20,7 +17,9 @@ namespace Chartist.Blazor.Charts
         [Inject]
         public IJSRuntime JS { get; set; }
 
-        ElementReference elem;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "<Pending>")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
+        private ElementReference elem;
 
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object> ExtraAttributes { get; set; }
