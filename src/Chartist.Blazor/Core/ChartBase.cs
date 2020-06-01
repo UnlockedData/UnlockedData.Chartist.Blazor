@@ -8,7 +8,7 @@ using Microsoft.JSInterop;
 
 namespace Chartist.Blazor.Core
 {
-    public abstract class EventedChartBase : ComponentBase
+    public abstract class ChartBase : ComponentBase
     {
         [Parameter]
         public EventCallback<ChartistMouseEventArgs> OnDataPointClicked { get; set; }

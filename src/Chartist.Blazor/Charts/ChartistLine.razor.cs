@@ -11,7 +11,7 @@ using Microsoft.JSInterop;
 
 namespace Chartist.Blazor.Charts
 {
-    public partial class ChartistEventedLine : EventedChartBase
+    public partial class ChartistLine : ChartBase
     {
         [Inject]
         private IJSRuntime JS { get; set; }

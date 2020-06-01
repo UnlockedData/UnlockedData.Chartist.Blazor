@@ -2,75 +2,46 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+
+using Chartist.Blazor.Core;
+using Chartist.Blazor.Core.Data;
+
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-using BarChartData = Chartist.Blazor.Core.Data.ExtendedChartData;
-
 namespace Chartist.Blazor.Charts
 {
-    public partial class ChartistBar : ComponentBase
+    public partial class ChartistBar : ChartBase
     {
-
-
-
         [Inject]
-        public IJSRuntime JS { get; set; }
+        private IJSRuntime JS { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "<Pending>")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
-        private ElementReference elem;
+        [Parameter] 
+        public Dictionary<string,object> ExtraAttributes { get; set; }
 
-        [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object> ExtraAttributes { get; set; }
-
-        [Parameter]
+        [Parameter] 
         public RenderFragment ChildContent { get; set; }
 
-        //[Parameter]
-        //public ChartType Type { get; set; }
-
         [Parameter]
-        public BarChartData Data { get; set; }
+        public ExtendedChartData Data { get; set; }
 
         [Parameter]
         public BarOptions Options { get; set; }
-
-               
-
+             
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-
-            
-
             if (Options == null)
-            {
                 Options = new BarOptions();
-                
-            }
 
-            if (Options.HorizontalBars)
-            {
-                foreach (var series in Data.Series)
-                {
-                    foreach (var point in series.Data)
-                    {
-                        point.SwapPoints();
-                    }
-                }
-            }
+            if (Options.HorizontalBars)            
+                Data.Series.ForEach(s =>
+                    s.Data.ForEach(d => d.SwapPoints()));
 
             if (firstRender)
             {
-
-                await JS.InvokeVoidAsync("bizzyChartist.createChart", "Bar", elem, Data, Options);
-
-
+                var objectRef = DotNetObjectReference.Create(this);
+                await JS.InvokeVoidAsync("bizzyChartist.createEventedChart", "Bar", elem, Data, Options, objectRef);
             }
-
-
-
-
         }
     }
 }
