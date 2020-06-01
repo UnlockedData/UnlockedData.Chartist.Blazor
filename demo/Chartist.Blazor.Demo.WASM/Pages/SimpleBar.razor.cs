@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Chartist.Blazor.Core.Data;
-using Chartist.Blazor.Services;
-
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -43,10 +41,10 @@ namespace Chartist.Blazor.Demo.WASM.Pages
 
         protected override void OnAfterRender(bool firstRender)
         {
-            DomEventRoutingService.DataPointClicked += (o, e) =>
-            {
-                Console.WriteLine("clicked a simple bar when you clicked me " + e.PointMetaInfo.Id + " " + e.PointMetaInfo.Label);
-            };
+            //DomEventRoutingService.DataPointClicked += (o, e) =>
+            //{
+            //    Console.WriteLine("clicked a simple bar when you clicked me " + e.PointMetaInfo.Id + " " + e.PointMetaInfo.Label);
+            //};
         }
 
 

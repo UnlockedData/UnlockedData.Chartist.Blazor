@@ -1,6 +1,6 @@
 ﻿using Chartist.Blazor.Core.Data;
 
-namespace Chartist.Blazor.Services
+namespace Chartist.Blazor
 {
     public class ChartistMouseEventArgs    
     {
