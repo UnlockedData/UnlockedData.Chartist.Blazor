@@ -6,7 +6,7 @@
 
         public double? Y { get; set; } = null;
 
-        public PointMetaInfo Meta { get; set; }
+        public PointMetaInfo Meta { get; set; } = new PointMetaInfo();
 
         //if there is a horizontal bars option set, the values need to be swapped
         public void SwapPoints()
@@ -15,5 +15,7 @@
             X = Y;
             Y = holder;
         }
+
+      
     }
 }

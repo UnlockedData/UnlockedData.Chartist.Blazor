@@ -15,7 +15,7 @@ namespace Chartist.Blazor.Core.Data
             //assert
             foreach (var items in list) {
 
-                seriesPoints.Add(new SeriesPoint { Y = list[i] });
+                seriesPoints.Add(new SeriesPoint { Y = list[i], Meta = new PointMetaInfo() });
                 i++;
             }
 
@@ -36,7 +36,7 @@ namespace Chartist.Blazor.Core.Data
             foreach (var items in list)
             {
 
-                seriesPoints.Add(new SeriesPoint { Y = list[i] });
+                seriesPoints.Add(new SeriesPoint { Y = list[i], Meta = new PointMetaInfo() });
                 i++;
             }
 
