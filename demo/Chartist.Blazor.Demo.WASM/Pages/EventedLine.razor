@@ -1,6 +1,7 @@
-﻿@page "/eventedbar"
+﻿@page "/eventedline"
 
-<h3>Evented Bar Chart</h3>
+<h3>Evented Line Chart</h3>
+<p>Points will respond to clicks</p>
 <div class="row">
     <div class="col-4">
         <table class="table table-bordered table-sm">
@@ -29,7 +30,7 @@
         <button class="btn btn-primary" @onclick="@ClearSelection">Clear Selection</button>
     </div>
     <div class="col-8">
-        <ChartistEventedBar Data="@chartData" Options="@chartOptions" OnDataPointClicked="DataPointClicked" />
+        <ChartistEventedLine Data="@chartData" Options="@chartOptions" OnDataPointClicked="DataPointClicked" />
     </div>
 </div>
 
@@ -58,7 +59,7 @@
         }
     };
 
-    private BarOptions chartOptions = new BarOptions();
+    private LineOptions chartOptions = new LineOptions();
 
     private void DataPointClicked(ChartistMouseEventArgs args)
     {

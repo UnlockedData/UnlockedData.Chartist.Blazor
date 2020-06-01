@@ -1,4 +1,4 @@
-﻿namespace Chartist.Blazor
+﻿namespace Chartist.Blazor.Core
 {
     /// <summary>
     /// The types of charts that can be used

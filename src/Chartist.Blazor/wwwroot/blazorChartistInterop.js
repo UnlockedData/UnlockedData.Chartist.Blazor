@@ -19,6 +19,7 @@
         chart.on('created', function (data) {
             switch (type) {
                 case "Bar":
+                    //each bar fires off
                     document.querySelectorAll('.' + options.classNames.bar).forEach(function (item) {
                         item.addEventListener('click', function (e) {
                             e = bizzyChartist.createChartistMouseEvents(e);
@@ -37,6 +38,21 @@
                 case "Pie":
                     break;
                 case "Line":
+                    //each point fires off
+                    document.querySelectorAll('.' + options.classNames.point).forEach(function (item) {
+                        item.addEventListener('click', function (e) {
+                            e = bizzyChartist.createChartistMouseEvents(e);
+                            instance.invokeMethodAsync("JSDomDataPointClicked", e);
+                        });
+                        item.addEventListener('mouseenter', function (e) {
+                            e = bizzyChartist.createChartistMouseEvents(e);
+                            instance.invokeMethodAsync("JSDomDataPointEntered", e);
+                        });
+                        item.addEventListener('mouseleave', function (e) {
+                            e = bizzyChartist.createChartistMouseEvents(e);
+                            instance.invokeMethodAsync("JSDomDataPointExited", e);
+                        });
+                    });
                     break;
             }
         });
@@ -66,40 +82,8 @@
         });
 
         chart.on('created', function (data) {
-            //bind all the dotnet events triggers to datapoints
-            switch (type) {
-                case "Bar":
-                    document.querySelectorAll('.' + options.classNames.bar).forEach(function (item) {
-                        item.addEventListener('click', function (e) {
-                            console.log(e)
-                            e = bizzyChartist.createChartistMouseEvents(e);
-                            console.log(e)
-                            DotNet.invokeMethodAsync('Chartist.Blazor', 'DomDataPointClicked', e)
-
-                        })
-                        item.addEventListener('mouseenter', function (e) {
-                            console.log(e)
-                            e = bizzyChartist.createChartistMouseEvents(e);
-                            console.log(e)
-                            DotNet.invokeMethodAsync('Chartist.Blazor', 'DomDataPointEntered', e)
-
-                        })
-                        item.addEventListener('mouseleave', function (e) {
-                            console.log(e)
-                            e = bizzyChartist.createChartistMouseEvents(e);
-                            console.log(e)
-                            DotNet.invokeMethodAsync('Chartist.Blazor', 'DomDataPointExited', e)
-
-                        })
-                    });
-                    break;
-                case "Pie":
-
-                    break;
-                case "Line":
-
-                    break;
-            }
+            
+            
 
 
         });
@@ -134,9 +118,7 @@
 
 };
 
-//window.NotifyDomDataPointClicked = function (e) {
-//    DotNet.invokeMethodAsync('Chartist.Blazor', 'DomDataPointClicked', e)
-//}
+
 
 
 window.bizzyChartist = new BlazorChartist();
