@@ -16,8 +16,7 @@ namespace Chartist.Blazor.Charts
         [Inject]
         private IJSRuntime JS { get; set; }
 
-        [Parameter] 
-        public Dictionary<string,object> ExtraAttributes { get; set; }
+        
 
         [Parameter] 
         public RenderFragment ChildContent { get; set; }
@@ -32,13 +31,14 @@ namespace Chartist.Blazor.Charts
         {
             if (Options == null)
                 Options = new LineOptions();
-                       
+            var objectRef = DotNetObjectReference.Create(this);           
 
             if (firstRender)
-            {
-                var objectRef = DotNetObjectReference.Create(this);
-                await JS.InvokeVoidAsync("bizzyChartist.createEventedChart", "Line", elem, Data, Options, objectRef);
+            {                
+                await JS.InvokeVoidAsync("bizzyChartist.createChart", "Line", elem, Data, Options, objectRef);
             }
+
+            await JS.InvokeVoidAsync("bizzyChartist.updateChart", elem, Data, Options, objectRef);
         }
     }
 }

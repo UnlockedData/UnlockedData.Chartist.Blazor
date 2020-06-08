@@ -1,22 +1,26 @@
 ﻿class BlazorChartist {
 
-    async createEventedChart(type, elem, data, options, instance) {
+   
+
+    createChart(type, elem, data, options, instance) {
         var chart;
+        bizzyChartist.data = data;
         switch (type) {
             case "Bar":
-                chart = await Chartist.Bar(elem, data, options);
+                chart = Chartist.Bar(elem, { series: [] }, options);
                 break;
             case "Pie":
-                chart = await Chartist.Pie(elem, data, options);
+                chart = Chartist.Pie(elem, { series: [] }, options);
                 break;
             case "Line":
-                chart = await Chartist.Line(elem, data, options);
+                chart = Chartist.Line(elem, { series: [] }, options);
                 break;
         }
 
         chart.on('draw', function (data) { });
 
         chart.on('created', function (data) {
+
             switch (type) {
                 case "Bar":
                     //each bar fires off
@@ -55,44 +59,20 @@
                     });
                     break;
             }
-        });
-        console.log(type + " created by chartistjs");
+         });
+
+        chart.on('update', function (data) {
+        });       
+
+        elem['_chart'] = chart        
     };
 
-    async createChart(type, elem, data, options) {
-        var chart;
-        switch (type) {
-            case "Bar":
-                chart = await Chartist.Bar(elem, data, options);
-                break;
-            case "Pie":
-                chart = await Chartist.Pie(elem, data, options);
-                break;
-            case "Line":
-                chart = await Chartist.Line(elem, data, options);
-                break;
-        }
-
-        chart.on('draw', function (data) {
-
-            //console.log(data);
-
-
-
-        });
-
-        chart.on('created', function (data) {
-            
-            
-
-
-        });
-        console.log(type + " created by chartistjs");
+    updateChart(elem, data, options, instance) {       
+       elem['_chart'].update(data, options);
+       console.log("Chart created");
+       console.log(elem['_chart']);
+                   
     };
-
-    // updateChart(elem, data, options) {
-    //     elem['_chart'].update(data, options);
-    // };
 
     createChartistMouseEvents(e) {
         let result = {
@@ -117,8 +97,5 @@
 
 
 };
-
-
-
 
 window.bizzyChartist = new BlazorChartist();

@@ -27,7 +27,7 @@ namespace Chartist.Blazor.Demo.WASM.Pages
 
             };
             
-            var series = new Series();
+            var series = new SeriesData();
             series.Data.Add(new SeriesPoint { X = null, Y = 12, Meta = new PointMetaInfo { Label = "Monday"} });
             series.Data.Add(new SeriesPoint { X = null, Y = 9, Meta = new PointMetaInfo{ Label = "Tuesday"}});
             series.Data.Add(new SeriesPoint { X = null, Y = 7, Meta = new PointMetaInfo{ Label = "Wednesday"} });

@@ -1,0 +1,64 @@
+﻿@page "/EventedMultipleBar"
+
+<h3>Multiple Bar with removal events</h3>
+
+<button @onclick=RemoveValue>Remove A Value</button>
+<button @onclick=RemoveSeries>Remove A Series</button>
+
+<ChartistBar Options=@options Labels=data.Labels >
+    @foreach (var seriesData in data.Series)
+    {
+        <BarSeries Name=@seriesData.Name Values=@seriesData.Data />
+    }
+</ChartistBar>
+
+@code  {              
+        private ExtendedChartData data;        
+       
+        private BarOptions options = new BarOptions();
+
+        private SeriesData seriesToStrip;
+        private SeriesPoint pointToStrip = new SeriesPoint { X = null, Y = 12, Meta = new PointMetaInfo { Label = "Monday"} };
+
+        protected override void OnInitialized()
+        {            
+
+            data = new Core.Data.ExtendedChartData()
+            {
+                Labels = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
+            };
+            var series = new SeriesData();
+            series.Name = "Series 1";
+            series.Data.Add(new SeriesPoint { X = null, Y = 12, Meta = new PointMetaInfo { Label = "Monday"} });
+            series.Data.Add(new SeriesPoint { X = null, Y = 9, Meta = new PointMetaInfo{ Label = "Tuesday"}});
+            series.Data.Add(new SeriesPoint { X = null, Y = 7, Meta = new PointMetaInfo{ Label = "Wednesday"} });
+            series.Data.Add(new SeriesPoint { X = null, Y = 8, Meta = new PointMetaInfo{ Label = "Thursday"} });
+            series.Data.Add(new SeriesPoint { X = null, Y = 5, Meta = new PointMetaInfo{ Label = "Friday"} });
+            data.Series.Add(series);
+            seriesToStrip = series;
+
+            series.Name = "Series 2";
+            series = new SeriesData();
+            series.Data.Add(new SeriesPoint { X = null, Y = 9, Meta = new PointMetaInfo { Label = "Monday"} });
+            series.Data.Add(new SeriesPoint { X = null, Y = 4, Meta = new PointMetaInfo{ Label = "Tuesday"}});
+            series.Data.Add(new SeriesPoint { X = null, Y = 2, Meta = new PointMetaInfo{ Label = "Wednesday"} });
+            series.Data.Add(new SeriesPoint { X = null, Y = 1, Meta = new PointMetaInfo{ Label = "Thursday"} });
+            series.Data.Add(new SeriesPoint { X = null, Y = 3, Meta = new PointMetaInfo{ Label = "Friday"} });
+            data.Series.Add(series);
+
+        }
+ 
+        private void RemoveValue () {
+            
+            data.Series[0].Data.Remove(pointToStrip);
+            StateHasChanged();
+        }
+
+           private void RemoveSeries () {
+            
+            data.Series.Remove(seriesToStrip);
+        }   
+
+
+
+    }

@@ -19,7 +19,7 @@ namespace Chartist.Blazor.UnitTests.Core.Core.Data
             };
 
 
-            var series = new Series();
+            var series = new SeriesData();
             series.Data.Add(new SeriesPoint { Y = 12 });
             series.Data.Add(new SeriesPoint { Y = 9 });
             series.Data.Add(new SeriesPoint { Y = 7 });

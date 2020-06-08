@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Chartist.Blazor.Core.Data
 {
-    public class Series
+    public class SeriesData
     {
         public List<SeriesPoint> Data {get; set;} = new List<SeriesPoint>();
 

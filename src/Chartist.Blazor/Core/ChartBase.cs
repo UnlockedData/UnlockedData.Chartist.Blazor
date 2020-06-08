@@ -10,6 +10,9 @@ namespace Chartist.Blazor.Core
 {
     public abstract class ChartBase : ComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)] 
+        public Dictionary<string,object> ExtraAttributes { get; set; }
+        
         [Parameter]
         public EventCallback<ChartistMouseEventArgs> OnDataPointClicked { get; set; }
 

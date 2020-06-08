@@ -14,34 +14,37 @@ namespace Chartist.Blazor.Charts
     public partial class ChartistBar : ChartBase
     {
         [Inject]
-        private IJSRuntime JS { get; set; }
-
-        [Parameter] 
-        public Dictionary<string,object> ExtraAttributes { get; set; }
+        private IJSRuntime JS { get; set; }       
 
         [Parameter] 
         public RenderFragment ChildContent { get; set; }
 
         [Parameter]
-        public ExtendedChartData Data { get; set; }
+        public ExtendedChartData Data { get; set; } = new ExtendedChartData();
 
         [Parameter]
-        public BarOptions Options { get; set; }
+        public BarOptions Options { get; set; } = new BarOptions();
+
+        [Parameter]
+        public List<string> Labels {get; set;} 
              
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (Options == null)
-                Options = new BarOptions();
 
+            Data.Labels = Labels ?? Data.Labels;
+
+            var objectRef = DotNetObjectReference.Create(this);
+            
             if (Options.HorizontalBars)            
                 Data.Series.ForEach(s =>
-                    s.Data.ForEach(d => d.SwapPoints()));
+                    s.Data.ForEach(d => d.SwapPoints()));                    
 
             if (firstRender)
             {
-                var objectRef = DotNetObjectReference.Create(this);
-                await JS.InvokeVoidAsync("bizzyChartist.createEventedChart", "Bar", elem, Data, Options, objectRef);
+                await JS.InvokeVoidAsync("bizzyChartist.createChart", "Bar", elem, Data, Options, objectRef);
             }
+
+            await JS.InvokeVoidAsync("bizzyChartist.updateChart", elem, Data, Options, objectRef);
         }
     }
 }
