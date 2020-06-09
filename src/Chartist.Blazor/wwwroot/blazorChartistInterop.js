@@ -5,6 +5,7 @@
     createChart(type, elem, data, options, instance) {
         var chart;
         bizzyChartist.data = data;
+        console.log(data);
         switch (type) {
             case "Bar":
                 chart = Chartist.Bar(elem, { series: [] }, options);
@@ -67,7 +68,8 @@
         elem['_chart'] = chart        
     };
 
-    updateChart(elem, data, options, instance) {       
+    updateChart(elem, data, options, instance) {   
+       bizzyChartist.data = data;
        elem['_chart'].update(data, options);
        console.log("Chart created");
        console.log(elem['_chart']);

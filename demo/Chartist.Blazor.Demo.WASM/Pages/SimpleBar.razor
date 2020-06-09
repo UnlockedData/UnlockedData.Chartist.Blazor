@@ -2,32 +2,39 @@
 
 <h3>SimpleBar</h3>
 
-<ChartistBar Options=@options Labels=SimpleBarData.Labels>
-    @foreach (var seriesData in SimpleBarData.Series)
+<ChartistBar Options=@options Labels=@data.Labels>
+    @foreach (var seriesData in data.Series)
     {
-        <BarSeries Name=@seriesData.Name Values=@seriesData.Data />
+        <BarSeries Name=@seriesData.Name>
+
+            @foreach (var values in seriesData.SeriesPoints)
+            {
+                <BarSeriesPoint X=@values.X Y=@values.Y Meta=@values.Meta />
+            }
+
+        </BarSeries>
     }
 </ChartistBar>
 
 @code  {              
-        private ExtendedChartData SimpleBarData;   
+        private ExtendedChartData data;   
        
-        private BarOptions options { get; set; } = new BarOptions();
+        private BarOptions options = new BarOptions();
 
         protected override void OnInitialized()
         {           
 
-            SimpleBarData = new Core.Data.ExtendedChartData()
+            data = new Core.Data.ExtendedChartData()
             {
                 Labels = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
             };
             var series = new SeriesData();
-            series.Data.Add(new SeriesPoint { X = null, Y = 12, Meta = new PointMetaInfo { Label = "Monday"} });
-            series.Data.Add(new SeriesPoint { X = null, Y = 9, Meta = new PointMetaInfo{ Label = "Tuesday"}});
-            series.Data.Add(new SeriesPoint { X = null, Y = 7, Meta = new PointMetaInfo{ Label = "Wednesday"} });
-            series.Data.Add(new SeriesPoint { X = null, Y = 8, Meta = new PointMetaInfo{ Label = "Thursday"} });
-            series.Data.Add(new SeriesPoint { X = null, Y = 5, Meta = new PointMetaInfo{ Label = "Friday"} });
-            SimpleBarData.Series.Add(series);
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 12, Meta = new PointMetaInfo { Label = "Monday"} });
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 9, Meta = new PointMetaInfo{ Label = "Tuesday"}});
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 7, Meta = new PointMetaInfo{ Label = "Wednesday"} });
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 8, Meta = new PointMetaInfo{ Label = "Thursday"} });
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 5, Meta = new PointMetaInfo{ Label = "Friday"} });
+            data.Series.Add(series);
 
            
 

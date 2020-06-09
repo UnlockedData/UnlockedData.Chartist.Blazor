@@ -12,7 +12,7 @@
 *@
 
 @code {
-    
+
 
     ElementReference elem;
 
@@ -29,21 +29,18 @@
     public PieChartData Data { get; set; }
 
     [Parameter]
-    public PieOptions Options { get; set; }
+    public PieOptions Options { get; set; } = new PieOptions();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (Options == null)
-        {
-            Options = new PieOptions();
-        }
+        var objectRef = DotNetObjectReference.Create(this);
 
         if (firstRender)
         {
-
-            await JS.InvokeVoidAsync("bizzyChartist.createChart", "Pie", elem, Data, Options);
-                        
+            await JS.InvokeVoidAsync("bizzyChartist.createChart", "Pie", elem, Data, Options, objectRef);
         }
+
+        await JS.InvokeVoidAsync("bizzyChartist.updateChart", elem, Data, Options, objectRef);
 
 
     }

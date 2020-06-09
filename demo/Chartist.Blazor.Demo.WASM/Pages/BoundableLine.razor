@@ -1,4 +1,4 @@
-﻿@page "/EventedMultipleBar"
+﻿@page "/BoundableLine"
 
 <h3>Multiple Bar with removal events</h3>
 
@@ -8,16 +8,16 @@
 
 <input type="checkbox" @bind=hidePoint />
 
-<ChartistBar Options=options Labels=data.Labels>
+<ChartistLine Options=options Labels=data.Labels>
 
-    <BarSeries Name=data.Series[seriesSel(hidePoint)].Name>
+    <LineSeries Name=data.Series[seriesSel(hidePoint)].Name>
         @foreach (var values in @data.Series[seriesSel(hidePoint)].SeriesPoints)
         {            
-                <BarPoint X=values.X Y=values.Y Meta=values.Meta />            
+                <LinePoint X=values.X Y=values.Y Meta=values.Meta />            
         }
-    </BarSeries>
+    </LineSeries>
 
-</ChartistBar>
+</ChartistLine>
 
 @code  {
 
@@ -37,7 +37,7 @@
         data.Series[0].SeriesPoints[0].Y = 0;
     }
 
-    private BarOptions options = new BarOptions();
+    private LineOptions options = new LineOptions();
 
     private SeriesData seriesToStrip;
     private SeriesPoint pointToStrip = new SeriesPoint { X = null, Y = 12, Meta = new PointMetaInfo { Label = "Monday" } };

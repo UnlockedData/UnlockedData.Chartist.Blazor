@@ -20,7 +20,7 @@ namespace Chartist.Blazor.Core.Data
                 i++;
             }
 
-            series.Add(new SeriesData { Data = seriesPoints, Name = name });
+            series.Add(new SeriesData { SeriesPoints = seriesPoints, Name = name });
 
             
 
@@ -41,7 +41,7 @@ namespace Chartist.Blazor.Core.Data
                 i++;
             }
 
-            series.Add(new SeriesData { Data = seriesPoints, Name = name });
+            series.Add(new SeriesData { SeriesPoints = seriesPoints, Name = name });
 
 
 
@@ -65,7 +65,7 @@ namespace Chartist.Blazor.Core.Data
                 i++;
             }
 
-            series.Add(new SeriesData { Data = seriesPoints, Name = name });
+            series.Add(new SeriesData { SeriesPoints = seriesPoints, Name = name });
 
 
 
@@ -97,7 +97,7 @@ namespace Chartist.Blazor.Core.Data
                 i++;
             }
 
-            series.Add(new SeriesData { Data = seriesPoints, Name = name });
+            series.Add(new SeriesData { SeriesPoints = seriesPoints, Name = name });
 
 
 

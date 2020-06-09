@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace Chartist.Blazor.Core.Data
 {
     public class SeriesData
     {
-        public List<SeriesPoint> Data {get; set;} = new List<SeriesPoint>();
+        [JsonPropertyName("data")]
+        public List<SeriesPoint> SeriesPoints {get; set;} = new List<SeriesPoint>();
 
         public string Name { get; set; } = "Series Not Named";
 

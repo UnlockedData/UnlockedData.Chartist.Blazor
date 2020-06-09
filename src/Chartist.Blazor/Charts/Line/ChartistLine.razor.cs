@@ -11,10 +11,10 @@ using Microsoft.JSInterop;
 
 namespace Chartist.Blazor.Charts
 {
-    public partial class ChartistBar : ChartBase
+    public partial class ChartistLine : ChartBase
     {
         [Inject]
-        private IJSRuntime JS { get; set; }       
+        private IJSRuntime JS { get; set; }        
 
         [Parameter] 
         public RenderFragment ChildContent { get; set; }
@@ -23,25 +23,21 @@ namespace Chartist.Blazor.Charts
         public ExtendedChartData Data { get; set; } = new ExtendedChartData();
 
         [Parameter]
-        public BarOptions Options { get; set; } = new BarOptions();
+        public LineOptions Options { get; set; } = new LineOptions();
 
+        
         [Parameter]
-        public List<string> Labels {get; set;} 
-             
+        public List<string> Labels { get; set; }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-
             Data.Labels = Labels ?? Data.Labels;
-
-            var objectRef = DotNetObjectReference.Create(this);
             
-            if (Options.HorizontalBars)            
-                Data.Series.ForEach(s =>
-                    s.Data.ForEach(d => d.SwapPoints()));                    
+            var objectRef = DotNetObjectReference.Create(this);           
 
             if (firstRender)
-            {
-                await JS.InvokeVoidAsync("bizzyChartist.createChart", "Bar", elem, Data, Options, objectRef);
+            {                
+                await JS.InvokeVoidAsync("bizzyChartist.createChart", "Line", elem, Data, Options, objectRef);
             }
 
             await JS.InvokeVoidAsync("bizzyChartist.updateChart", elem, Data, Options, objectRef);

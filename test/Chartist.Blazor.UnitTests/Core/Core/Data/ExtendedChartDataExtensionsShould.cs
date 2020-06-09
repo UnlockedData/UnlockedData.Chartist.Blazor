@@ -21,9 +21,9 @@ namespace Chartist.Blazor.UnitTests.Core.Core.Data
             //assert
             foreach (var items in testList)
             {
-                Assert.Null(sut.Series[0].Data[i].X);
-                Assert.Equal(testList[i], sut.Series[0].Data[i].Y);
-                Assert.Null(sut.Series[0].Data[i].Meta);
+                Assert.Null(sut.Series[0].SeriesPoints[i].X);
+                Assert.Equal(testList[i], sut.Series[0].SeriesPoints[i].Y);
+                Assert.Null(sut.Series[0].SeriesPoints[i].Meta);
                 i++;
             }
             
