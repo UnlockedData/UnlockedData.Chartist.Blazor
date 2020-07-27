@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace Chartist.Blazor.Charts {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "<Pending>")]
     public partial class BarSeries : ComponentBase, IDisposable
     {
         
@@ -26,12 +27,12 @@ namespace Chartist.Blazor.Charts {
         
 
         // Each time the params change, update a 'SeriesData' instance
-        private readonly SeriesData seriesData = new SeriesData();
+        private readonly SeriesData _seriesData = new SeriesData();
         protected override void OnParametersSet()
         {
-            seriesData.Name = Name;
-            seriesData.SeriesPoints = SeriesPoints;
-            seriesData.Meta = Meta;
+            _seriesData.Name = Name;
+            _seriesData.SeriesPoints = SeriesPoints;
+            _seriesData.Meta = Meta;
         }
 
         // When we're first added to the UI, attach our data to parent
@@ -39,9 +40,11 @@ namespace Chartist.Blazor.Charts {
         [CascadingParameter] public ChartistBar OwnerChart { get; set; }
 
         protected override void OnInitialized()
-            => OwnerChart.Data.Series.Add(seriesData);
+            => OwnerChart.Data.Series.Add(_seriesData);
 
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "<Pending>")]
         void IDisposable.Dispose()
-            => OwnerChart.Data.Series.Remove(seriesData);
+            => OwnerChart.Data.Series.Remove(_seriesData);
     }
 }
