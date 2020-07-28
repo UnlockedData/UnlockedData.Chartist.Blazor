@@ -1,6 +1,6 @@
 ﻿@page "/MultipleBar"
 
-<h3>SimpleBar</h3>
+<h3>Simple Multiple Bar</h3>
 
 <ChartistBar Options=@options Labels=@data.Labels>
     @foreach (var seriesData in data.Series)
@@ -9,7 +9,7 @@
 
             @foreach (var values in seriesData.SeriesPoints)
             {
-                <BarSeriesPoint X=@values.X Y=@values.Y Meta=@values.Meta />
+                <BarPoint X=@values.X Y=@values.Y Meta=@values.Meta />
             }
 
         </BarSeries>

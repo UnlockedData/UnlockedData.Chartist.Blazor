@@ -20,11 +20,11 @@ namespace Chartist.Blazor.UnitTests.Core.Core.Data
 
 
             var series = new SeriesData();
-            series.Data.Add(new SeriesPoint { Y = 12 });
-            series.Data.Add(new SeriesPoint { Y = 9 });
-            series.Data.Add(new SeriesPoint { Y = 7 });
-            series.Data.Add(new SeriesPoint { Y = 8 });
-            series.Data.Add(new SeriesPoint { Y = 5 });
+            series.SeriesPoints.Add(new SeriesPoint { Y = 12 });
+            series.SeriesPoints.Add(new SeriesPoint { Y = 9 });
+            series.SeriesPoints.Add(new SeriesPoint { Y = 7 });
+            series.SeriesPoints.Add(new SeriesPoint { Y = 8 });
+            series.SeriesPoints.Add(new SeriesPoint { Y = 5 });
             result.Series.Add(series);
 
             return result;
