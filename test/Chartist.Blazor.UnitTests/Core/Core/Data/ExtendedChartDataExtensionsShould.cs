@@ -23,7 +23,6 @@ namespace Chartist.Blazor.UnitTests.Core.Core.Data
             {
                 Assert.Null(sut.Series[0].SeriesPoints[i].X);
                 Assert.Equal(testList[i], sut.Series[0].SeriesPoints[i].Y);
-                Assert.Null(sut.Series[0].SeriesPoints[i].Meta);
                 i++;
             }
             
