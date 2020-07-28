@@ -1,0 +1,87 @@
+﻿@page "/eventedline"
+
+<h3>Evented Line Chart</h3>
+<p>Points will respond to clicks</p>
+<div class="row">
+    <div class="col-4">
+        <table class="table table-bordered table-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Id</th>
+                    <td>@selectedId</td>
+                </tr>
+                <tr>
+                    <th scope="row">Label</th>
+                    <td>@selectedLabel</td>
+                </tr>
+                <tr>
+                    <th scope="row">Value</th>
+                    <td>@selectedValue</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <button class="btn btn-primary" @onclick="@ClearSelection">Clear Selection</button>
+    </div>
+    <div class="col-8">
+        <ChartistLine Data="@chartData" Options="@chartOptions" OnDataPointClicked="DataPointClicked" />
+    </div>
+</div>
+
+@code {
+
+    private double? selectedValue;
+    private string selectedId;
+    private string selectedLabel;
+
+    private ExtendedChartData chartData = new ExtendedChartData
+    {
+        Labels = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" },
+        Series = new List<SeriesData>
+    {
+            new SeriesData
+            {
+                SeriesPoints = new List<SeriesPoint>
+            {
+                    new SeriesPoint {X = null, Y = 12, Meta = new PointMetaInfo {Label = "Monday"}},
+                    new SeriesPoint { X = null, Y = 9, Meta = new PointMetaInfo{ Label = "Tuesday"}},
+                    new SeriesPoint { X = null, Y = 7, Meta = new PointMetaInfo{ Label = "Wednesday"}},
+                    new SeriesPoint { X = null, Y = 8, Meta = new PointMetaInfo{ Label = "Thursday"}},
+                    new SeriesPoint { X = null, Y = 5, Meta = new PointMetaInfo{ Label = "Friday"}}
+                }
+            }
+        }
+    };
+
+    private LineOptions chartOptions = new LineOptions();
+
+    private void DataPointClicked(ChartistMouseEventArgs args)
+    {
+        Console.WriteLine(args.PointMetaInfo.Id);
+        selectedId = args.PointMetaInfo.Id;
+
+        Console.WriteLine(args.PointMetaInfo.Label);
+        selectedLabel = args.PointMetaInfo.Label;
+
+        Console.WriteLine(args.Value);
+        selectedValue = args.Value;
+
+        
+    }
+
+    private void ClearSelection()
+    {
+        selectedId = string.Empty;
+        selectedLabel = string.Empty;
+        selectedValue = null;
+
+        
+    }
+
+}

@@ -1,4 +1,5 @@
 # Chartist.Blazor
+
 A Blazor implementation of ChartistJS
 
 ![ci-build](https://github.com/sxotney/Chartist.Blazor/workflows/ci-build/badge.svg)
@@ -11,13 +12,15 @@ Influenced by mariusmuntean's [ChartJS.Blazor](https://github.com/mariusmuntean/
 
 ## Installation
 
-To Install 
+To Install:
 
 ```ps1
 Install-Package Chartist.Blazor
 ```
+
 or
-```
+
+```ps1
 dotnet add package Chartist.Blazor
 ```
 
@@ -29,17 +32,20 @@ For client-side and server-side Blazor - add script section to index.html or _Ho
     <script src="_content/Chartist.Blazor/blazorChartistInterop.js"></script>
 ```
 
-
 ## Release Notes
 
 ### What's New
 
-- This library allows you to add line, bar and pie chart components to your Blazor apps
+- Namespaces have been changed for this release
+- Event callbacks can now be passed to chart points
+- Components have been made more 'Blazory' with series and points now usable as components within a chart
+- Series data objects have been updated to reflect the core Chartist JS type, extension methods have been added to maintain backwards compatibility
 
-### Gotchas
+### Known Issues
 
-- Due to serialisation configuration missing from the current release of Blazor (3.2), some chart options are not available and will be set to whatever the default value in the JS library is
+- Due to serialisation configuration missing from the current release of Blazor (3.2), some chart options are not available and will be set to whatever the default value in the JS library is. These will be available to set to empty in a future release as looking at the Chartist source, defaults get set when these are missing.
+- A small change has been made to the chartist js source as it is way easier to select items in query selector that don't have colons in them.
 
 ### Bug Fixes
 
-- None for this initial release
+- None for this release

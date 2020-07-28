@@ -1,0 +1,14 @@
+﻿@page "/simplepie"
+<h3>Simple Pie</h3>
+
+<ChartistPie Data="SimplePieData" Options="SimplePieOptions" />
+
+@code {
+    private PieChartData SimplePieData { get; set; } = new PieChartData()
+    {
+        Series = new List<double> { 5, 3, 4 }
+    };
+    private PieOptions SimplePieOptions { get; set; } = new PieOptions();
+
+
+}

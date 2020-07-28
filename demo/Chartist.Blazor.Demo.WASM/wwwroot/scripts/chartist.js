@@ -1,4 +1,4 @@
-﻿(function (root, factory) {
+(function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module unless amdModuleId is set
         define('Chartist', [], function () {
@@ -3466,7 +3466,7 @@
                             x2: pathElement.x + 0.01,
                             y2: pathElement.y
                         }, options.classNames.point).attr({
-                            'ct-value': [pathElement.data.value.x, pathElement.data.value.y].filter(Chartist.isNumeric).join(','),
+                            'ct:value': [pathElement.data.value.x, pathElement.data.value.y].filter(Chartist.isNumeric).join(','),
                             'ct-meta': Chartist.serialize(pathElement.data.meta)
                         });
 
@@ -3918,7 +3918,7 @@
                 var biPol = seriesIndex - (data.raw.series.length - 1) / 2;
                 // Half of the period width between vertical grid lines used to position bars
                 var periodHalfLength;
-                // Current series SVG element
+                // Current series SVG elementct-meta
                 var seriesElement;
 
                 // We need to set periodHalfLength based on some options combinations
@@ -4033,7 +4033,7 @@
 
                     // Create bar element
                     bar = seriesElement.elem('line', positions, options.classNames.bar).attr({
-                        'ct-value': [value.x, value.y].filter(Chartist.isNumeric).join(','),
+                        'ct:value': [value.x, value.y].filter(Chartist.isNumeric).join(','),
                         'ct-meta': Chartist.serialize(metaData)
                     });
 
@@ -4339,7 +4339,7 @@
 
                 // Adding the pie series value to the path
                 pathElement.attr({
-                    'ct-value': data.normalized.series[index],
+                    'ct:value': data.normalized.series[index],
                     'ct-meta': Chartist.serialize(series.meta)
                 });
 
