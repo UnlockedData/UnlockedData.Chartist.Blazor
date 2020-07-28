@@ -14,7 +14,7 @@ namespace Chartist.Blazor.Core.Data
         /// <value>
         /// The series.
         /// </value>
-        // public List<List<double?>> Series { get; set; } = new List<List<double?>>();
+        
         public List<SeriesData> Series { get; set; } = new List<SeriesData>();
 
         

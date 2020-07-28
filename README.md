@@ -36,7 +36,7 @@ For client-side and server-side Blazor - add script section to index.html or _Ho
 
 ### What's New
 
-- This library allows you to add line, bar and pie chart components to your Blazor apps
+- Namespaces have been changed for this release
 - Event callbacks can now be passed to chart points
 - Components have been made more 'Blazory' with series and points now usable as components within a chart
 - Series data objects have been updated to reflect the core Chartist JS type, extension methods have been added to maintain backwards compatibility
@@ -48,4 +48,4 @@ For client-side and server-side Blazor - add script section to index.html or _Ho
 
 ### Bug Fixes
 
-- None for this initial release
+- None for this release
