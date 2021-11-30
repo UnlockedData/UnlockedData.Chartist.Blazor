@@ -1,4 +1,4 @@
-# Chartist.Blazor
+# UnlockedData.Chartist.Blazor
 
 A Blazor implementation of ChartistJS
 
@@ -27,9 +27,9 @@ dotnet add package Chartist.Blazor
 For client-side and server-side Blazor - add script section to index.html or _Host.cshtml (head section)
 
 ```xml
-    <link href="_content/Chartist.Blazor/chartist.min.css" rel="stylesheet" />
-    <script src="_content/Chartist.Blazor/chartist.js"></script>
-    <script src="_content/Chartist.Blazor/blazorChartistInterop.js"></script>
+    <link href="_content/UnlockedData.Chartist.Blazor/chartist.min.css" rel="stylesheet" />
+    <script src="_content/UnlockedData.Chartist.Blazor/chartist.js"></script>
+    <script src="_content/UnlockedData.Chartist.Blazor/blazorChartistInterop.js"></script>
 ```
 
 ## Release Notes

@@ -1,0 +1,44 @@
+﻿@using Microsoft.JSInterop
+@using UnlockedData.Chartist.Blazor
+@using UnlockedData.Chartist.Blazor.Core.Data
+@inherits UnlockedData.Chartist.Blazor.Core.ChartBase
+@namespace Chartist.Blazor.Charts
+
+<div @ref=elem class="ct-chart ct-golden-section" @attributes=ExtraAttributes></div>
+
+<CascadingValue Value="@this">
+    @ChildContent
+</CascadingValue>
+
+@code
+{
+    [Inject]
+    private IJSRuntime JS { get; set; }        
+
+    [Parameter] 
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public ExtendedChartData Data { get; set; } = new ExtendedChartData();
+
+    [Parameter]
+    public LineOptions Options { get; set; } = new LineOptions();
+
+        
+    [Parameter]
+    public List<string> Labels { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        Data.Labels = Labels ?? Data.Labels;
+            
+        var objectRef = DotNetObjectReference.Create(this);           
+
+        if (firstRender)
+        {                
+            await JS.InvokeVoidAsync("bizzyChartist.createChart", "Line", elem, Data, Options, objectRef);
+        }
+
+        await JS.InvokeVoidAsync("bizzyChartist.updateChart", elem, Data, Options, objectRef);
+    }
+}
