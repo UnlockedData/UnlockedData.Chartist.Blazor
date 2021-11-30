@@ -1,6 +1,6 @@
 ﻿@page "/plugins"
 
-<h3>Simple Multiple Bar</h3>
+<h3>Plugins Activated</h3>
 
 <ChartistBar Options=@options Labels=@data.Labels>
     @foreach (var seriesData in data.Series)
@@ -26,7 +26,7 @@
             ShowLegend = true,
             ShowTooltips = true,
             ShowPointLabels = true,
-            UseZoom = false
+            UseZoom = true
 
         };        
  

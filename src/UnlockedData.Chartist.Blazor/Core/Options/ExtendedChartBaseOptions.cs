@@ -1,25 +1,24 @@
-﻿namespace UnlockedData.Chartist.Blazor
+﻿namespace UnlockedData.Chartist.Blazor;
+
+/// <summary>
+/// Defines the extended options for relevant charts.
+/// </summary>
+/// <seealso cref="UnlockedData.Chartist.Blazor.ChartBaseOptions" />
+public class ExtendedChartBaseOptions : ChartBaseOptions
 {
     /// <summary>
-    /// Defines the extended options for relevant charts.
+    /// Gets or sets a value indicating whether to show the background grid.
     /// </summary>
-    /// <seealso cref="UnlockedData.Chartist.Blazor.ChartBaseOptions" />
-    public class ExtendedChartBaseOptions : ChartBaseOptions
-    {
-        /// <summary>
-        /// Gets or sets a value indicating whether to show the background grid.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if the background grid should be shown; otherwise, <c>false</c>.
-        /// </value>
-        public bool ShowGridBackground { get; set; } = false;
+    /// <value>
+    ///   <c>true</c> if the background grid should be shown; otherwise, <c>false</c>.
+    /// </value>
+    public bool ShowGridBackground { get; set; } = false;
 
-        /// <summary>
-        /// Gets or sets the chart padding.
-        /// </summary>
-        /// <value>
-        /// The chart padding.
-        /// </value>
-        public ChartPadding ChartPadding { get; set; } = new ChartPadding();
-    }
+    /// <summary>
+    /// Gets or sets the chart padding.
+    /// </summary>
+    /// <value>
+    /// The chart padding.
+    /// </value>
+    public ChartPadding ChartPadding { get; set; } = new ChartPadding();
 }

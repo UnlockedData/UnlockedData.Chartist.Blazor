@@ -2,9 +2,9 @@
 {
     public class SeriesPoint
     {
-        public double? X { get; set; } = null;
+        public double? X { get; set; }
 
-        public double? Y { get; set; } = null;
+        public double? Y { get; set; } 
 
         public PointMetaInfo Meta { get; set; } = new PointMetaInfo();
 

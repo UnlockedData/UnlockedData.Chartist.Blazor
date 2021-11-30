@@ -4,5 +4,4 @@ public enum StackMode
 {
     Accumulate,
     Overlap
-        
 }
