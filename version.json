@@ -4,7 +4,7 @@
     "precision": "revision"
   },
   "publicReleaseRefSpec": [
-    "^refs/heads/master$",
+    "^refs/heads/main$",
     "^refs/heads/rel/v\\d+\\.\\d+"
   ],
   "nugetPackageVersion": {
