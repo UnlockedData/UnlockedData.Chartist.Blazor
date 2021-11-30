@@ -2,7 +2,7 @@
 
 A Blazor implementation of ChartistJS
 
-![ci-build](https://github.com/sxotney/Chartist.Blazor/workflows/ci-build/badge.svg)
+[![ci-build](https://github.com/UnlockedData/UnlockedData.Chartist.Blazor/actions/workflows/ci-build.yml/badge.svg)](https://github.com/UnlockedData/UnlockedData.Chartist.Blazor/actions/workflows/ci-build.yml)
 
 A Blazor implementation of [ChartistJS](https://github.com/gionkunz/chartist-js) strongly influenced by [Steve Sanderson's NDC demo](https://github.com/SteveSandersonMS/presentation-2020-01-NdcBlazorComponentLibraries) 
 
