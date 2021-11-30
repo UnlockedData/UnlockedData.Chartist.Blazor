@@ -47,7 +47,7 @@
 
 
         var chart;
-        bizzyChartist.data = data;
+        bChartist.data = data;
         switch (type) {
             case "Bar":
                 chart = Chartist.Bar(elem, data, options);
@@ -70,15 +70,15 @@
                     //each bar fires off
                     document.querySelectorAll('.' + options.classNames.bar).forEach(function (item) {
                         item.addEventListener('click', function (e) {
-                            e = bizzyChartist.createChartistMouseEvents(e);
+                            e = bChartist.createChartistMouseEvents(e);
                             instance.invokeMethodAsync("JSDomDataPointClicked", e);
                         });
                         item.addEventListener('mouseenter', function (e) {
-                            e = bizzyChartist.createChartistMouseEvents(e);
+                            e = bChartist.createChartistMouseEvents(e);
                             instance.invokeMethodAsync("JSDomDataPointEntered", e);
                         });
                         item.addEventListener('mouseleave', function (e) {
-                            e = bizzyChartist.createChartistMouseEvents(e);
+                            e = bChartist.createChartistMouseEvents(e);
                             instance.invokeMethodAsync("JSDomDataPointExited", e);
                         });
                     });
@@ -89,15 +89,15 @@
                     //each point fires off
                     document.querySelectorAll('.' + options.classNames.point).forEach(function (item) {
                         item.addEventListener('click', function (e) {
-                            e = bizzyChartist.createChartistMouseEvents(e);
+                            e = bChartist.createChartistMouseEvents(e);
                             instance.invokeMethodAsync("JSDomDataPointClicked", e);
                         });
                         item.addEventListener('mouseenter', function (e) {
-                            e = bizzyChartist.createChartistMouseEvents(e);
+                            e = bChartist.createChartistMouseEvents(e);
                             instance.invokeMethodAsync("JSDomDataPointEntered", e);
                         });
                         item.addEventListener('mouseleave', function (e) {
-                            e = bizzyChartist.createChartistMouseEvents(e);
+                            e = bChartist.createChartistMouseEvents(e);
                             instance.invokeMethodAsync("JSDomDataPointExited", e);
                         });
                     });
@@ -112,7 +112,7 @@
     };
 
     updateChart(elem, data, options, instance) {
-        bizzyChartist.data = data;
+        bChartist.data = data;
         elem['_chart'].update(data, options);
 
 
@@ -120,7 +120,7 @@
 
     createChartistMouseEvents(e) {
         let result = {
-            pointMetaInfo: JSON.parse(bizzyChartist.decodeHTMLEntities(e.target.getAttribute('ct-meta'))).data,
+            pointMetaInfo: JSON.parse(bChartist.decodeHTMLEntities(e.target.getAttribute('ct-meta'))).data,
             value: Number(e.target.getAttribute('ct-value')),
             seriesName: e.target.parentElement.getAttribute('ct-series-name')
         };
@@ -140,4 +140,4 @@
 
 }
 
-window.bizzyChartist = new BlazorChartist(); 
+window.bChartist = new BlazorChartist(); 
