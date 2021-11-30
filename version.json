@@ -10,5 +10,8 @@
   "publicReleaseRefSpec": [
     "^refs/heads/main$",
     "^refs/heads/rel/v\\d+\\.\\d+"
-  ]
+  ],
+  "release": {
+    "branchName": "rel/v{version}"
+  }
 }
