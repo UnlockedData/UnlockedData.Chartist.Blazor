@@ -33,7 +33,7 @@ jobs:
         setAllVars: true
     - run: echo "NBGV_SemVer2 $NBGV_SemVer2"
     - name: Build
-      run: dotnet build UnlockedData.UnlockedData.Chartist.Blazor.sln --configuration Release --no-restore
+      run: dotnet build UnlockedData.Chartist.Blazor.sln --configuration Release --no-restore
     - name: Unit Tests
       run: dotnet test UnlockedData.Chartist.Blazor.sln --no-restore --verbosity normal
     - name: Create Package Dir
