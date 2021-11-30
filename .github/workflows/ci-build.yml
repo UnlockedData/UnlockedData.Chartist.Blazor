@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - 'rel/*'
+      - 'rel/v*'
     paths-ignore:
       - README.md
   pull_request:
@@ -21,25 +21,25 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
-    - name: Setup .NET Core
+    - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.102
+        dotnet-version: '6.0'
     - name: Install dependencies
-      run: dotnet restore Chartist.Blazor.sln
+      run: dotnet restore UnlockedData.Chartist.Blazor.sln
     - name: ngbv set version
-      uses: aarnott/nbgv@v0.3
+      uses: aarnott/nbgv@v0.4
       with:
         setAllVars: true
     - run: echo "NBGV_SemVer2 $NBGV_SemVer2"
     - name: Build
-      run: dotnet build Chartist.Blazor.sln --configuration Release --no-restore
+      run: dotnet build UnlockedData.UnlockedData.Chartist.Blazor.sln --configuration Release --no-restore
     - name: Unit Tests
-      run: dotnet test Chartist.Blazor.sln --no-restore --verbosity normal
+      run: dotnet test UnlockedData.Chartist.Blazor.sln --no-restore --verbosity normal
     - name: Create Package Dir
       run: mkdir ${{ github.workspace }}/package
     - name: Pack
-      run: dotnet pack Chartist.Blazor.sln --no-build -c Release --output "${{ github.workspace }}/package"
+      run: dotnet pack UnlockedData.Chartist.Blazor.sln --no-build -c Release --output "${{ github.workspace }}/package"
     - name: Upload Artifacts
       uses: actions/upload-artifact@v1
       with:

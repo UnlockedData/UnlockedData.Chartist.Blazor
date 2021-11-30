@@ -1,4 +1,6 @@
-﻿namespace UnlockedData.Chartist.Blazor
+﻿using System.Text.Json.Serialization;
+
+namespace UnlockedData.Chartist.Blazor
 {
     /// <summary>
     /// Defines the Pie Chart Options
@@ -22,7 +24,7 @@
         /// </value>
         public double StartAngle { get; set; } = 0;
 
-        /* TODO: commented out as blazor will not allow serialisation options to be changed. Update it dotnet 5 (breaking change)
+        
 
         /// <summary>
         /// Gets or sets the total.
@@ -30,9 +32,10 @@
         /// <value>
         /// The total.
         /// </value>
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public double? Total { get; set; }
 
-        */
+        
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="PieOptions"/> is donut.

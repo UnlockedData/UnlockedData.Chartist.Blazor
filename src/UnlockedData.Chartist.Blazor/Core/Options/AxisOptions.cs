@@ -1,4 +1,13 @@
-﻿namespace UnlockedData.Chartist.Blazor
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks.Dataflow;
+
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+
+using UnlockedData.Chartist.Blazor.Extensions;
+
+namespace UnlockedData.Chartist.Blazor
 {
     /// <summary>
     /// Defines a chart's axis options
@@ -24,8 +33,8 @@
         /// <remarks>
         /// Default value is "end"
         /// </remarks>
-        public string Position { get; set; } = "end";
-        //TODO: define position enum
+        [JsonConverter(typeof(EnumAsStringCamelCaseConverter<LabelPosition>))]
+        public LabelPosition Position { get; set; } = LabelPosition.End;
 
         /// <summary>
         /// Gets or sets the label offset.
@@ -34,6 +43,11 @@
         /// The label offset.
         /// </value>
         public LabelOffset LabelOffset { get; set; } = new LabelOffset();
+
+        /// <summary>
+        /// You can supply a function name for this that exists on the Chartist object
+        /// </summary>
+        public string? LabelInterpolationFnc { get; set; } = "noop";
 
         /// <summary>
         /// Gets or sets a value indicating whether to show labels.
@@ -59,6 +73,21 @@
         /// </value>
         public double ScaleMinSpace { get; set; } = 30;
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? High { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Low { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? ReferenceValue { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Divisor { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<dynamic> Ticks { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether only integers should be allowed.
         /// </summary>
@@ -68,19 +97,21 @@
         /// <remarks>
         /// Default value is false;
         /// </remarks>
-        public bool OnlyInteger { get; set; } = false;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? OnlyInteger { get; set; }
 
-        /* TODO: commented out as blazor will not allow serialisation options to be changed. Update it dotnet 5 (breaking change)
-        
         /// <summary>
         /// Gets or sets the type.
         /// </summary>
         /// <value>
         /// The type.
         /// </value>
-        public string? Type { get; set; }
-            
-        */
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public AxisType? Type { get; set; } 
+        
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? Stretch { get; set; }
 
         #endregion
 
@@ -94,14 +125,12 @@
         public static AxisOptions Load(string axis) =>
             axis switch
             {
-                "y" => new AxisOptions 
-                {
-                    Position = "start"
-                },
+                "y" => new AxisOptions {Position = LabelPosition.Start ,Type = null},
                 _ => new AxisOptions()
             };
 
         #endregion
-    }
+    }    
 
+    
 }

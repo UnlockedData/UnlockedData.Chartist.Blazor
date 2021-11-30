@@ -780,9 +780,6 @@
     top: 0;
     left: 0;
 }
-
-
-
 /*Legend defaults*/
 
 .ct-legend {
@@ -851,8 +848,6 @@
     background-color: #453d3f;
     border-color: #453d3f;
 }
-
-
 
 /*Tooltips*/
 .chartist-tooltip {
@@ -930,25 +925,6 @@
     }
 }
 
-.collapse:not(.show) {
-    display: block;
-    height: 0;
-    overflow-y: hidden;
-}
-
-.tab-pane:not(.active) {
-    display: block;
-    height: 0;
-    overflow-y: hidden;
-}
-
-
-.carousel-item:not(.active) {
-    display: block;
-    height: 0;
-    overflow-y: hidden;
-}
-
 svg.ct-chart-bar, svg.ct-chart-line{
     overflow: visible;
     margin : 0 0 30px 0;
@@ -961,4 +937,9 @@ svg.ct-chart-bar, svg.ct-chart-line{
     transform-origin: 100% 0;
     transform: translate(-100%) rotate(-45deg);
     white-space:nowrap !important;
+}
+
+.ct-zoom-rect {
+    fill: rgba(200, 100, 100, 0.3);
+    stroke: red;
 }

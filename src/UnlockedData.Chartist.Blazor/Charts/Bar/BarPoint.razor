@@ -1,42 +1,53 @@
 ﻿@using UnlockedData.Chartist.Blazor.Core.Data
-@using global::Chartist.Blazor.Charts
+@using Microsoft.JSInterop
+@using UnlockedData.Chartist.Blazor.Extensions
+
+@inherits Chartist.Blazor.Core.ChartBase
+
 @implements IDisposable
+
+@inject IJSRuntime JS
+
+@namespace UnlockedData.Chartist.Blazor.Charts
 
 @code {
 
+    private readonly SeriesPoint _point = new();
+
     // Accept data via Razor syntax
     [Parameter]
-    public double? X { get; set; } = null;
+    public double? X { get; set; }
 
     [Parameter]
-    public double? Y { get; set; } = null;
+    public double? Y { get; set; }
 
     [Parameter]
-    public PointMetaInfo Meta { get; set; } = new PointMetaInfo();
+    public PointMetaInfo Meta { get; set; } = new();
 
     [CascadingParameter]
     public BarSeries OwnerSeries { get; set; }
 
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-    // Each time the params change, update a 'SeriesPoint' instance
-    private readonly SeriesPoint point = new SeriesPoint();
+    protected virtual void Dispose(bool disposing)
+    {
+        OwnerSeries.SeriesPoints.Remove(_point);
+    }
 
     protected override void OnParametersSet()
     {
-        point.X = X;
-        point.Y = Y;
-        point.Meta = Meta;
+        _point.X = X;
+        _point.Y = Y;
+        _point.Meta = Meta;
     }
 
     protected override void OnInitialized()
     {
-        OwnerSeries.SeriesPoints.Add(point);
+        OwnerSeries.SeriesPoints.Add(_point);
     }
-
-
-    void IDisposable.Dispose()
-        => OwnerSeries.SeriesPoints.Remove(point);
-
-}
 
 }

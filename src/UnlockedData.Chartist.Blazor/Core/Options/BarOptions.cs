@@ -1,4 +1,8 @@
-﻿namespace UnlockedData.Chartist.Blazor
+﻿using System.Text.Json.Serialization;
+
+using UnlockedData.Chartist.Blazor.Extensions;
+
+namespace UnlockedData.Chartist.Blazor
 {
     /// <summary>
     /// Defines the Bar Chart Options
@@ -39,6 +43,7 @@
         /// </remarks>
         public bool StackBars { get; set; } = false;
 
+        
         /// <summary>
         /// Gets or sets the stack mode.
         /// </summary>
@@ -48,8 +53,9 @@
         /// <remarks>
         /// Default value is 'accumulate'
         /// </remarks>
-        public string StackMode { get; set; } = "accumulate"; //enum accumulate/overlap
-        //TODO: define stackmode as enum
+        [JsonConverter(typeof(EnumAsStringCamelCaseConverter<StackMode>))]
+        public StackMode StackMode { get; set; } = StackMode.Accumulate; //enum accumulate/overlap
+        
 
         /// <summary>
         /// Gets or sets a value indicating whether the bars should be horizontal.

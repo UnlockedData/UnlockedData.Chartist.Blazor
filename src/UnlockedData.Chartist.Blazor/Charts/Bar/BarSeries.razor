@@ -1,7 +1,9 @@
 @using System.Xml.Schema
 @using UnlockedData.Chartist.Blazor.Core.Data
 @implements IDisposable
-@namespace Chartist.Blazor.Charts
+
+@namespace UnlockedData.Chartist.Blazor.Charts
+
 <CascadingValue Value="@this">
     @ChildContent
 </CascadingValue>
@@ -9,22 +11,33 @@
 @code
 {
 
-    // Accept data via Razor syntax
-    [Parameter]
-    public string Name { get; set; }
-
-    [Parameter]
-    public List<SeriesPoint> SeriesPoints { get; set; } = new List<SeriesPoint>();
-
-    [Parameter]
-    public string Meta { get; set; }
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
-
-
     // Each time the params change, update a 'SeriesData' instance
-    private readonly SeriesData _seriesData = new SeriesData();
+    private readonly SeriesData _seriesData = new();
+
+    // Accept data via Razor syntax
+    [Parameter] public string Name { get; set; }
+
+    [Parameter] public List<SeriesPoint> SeriesPoints { get; set; } = new();
+
+    [Parameter] public string Meta { get; set; }
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    // When we're first added to the UI, attach our data to parent
+    // When we're removed from the UI, remove our data from parent
+    [CascadingParameter] public ChartistBar OwnerChart { get; set; }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        OwnerChart.Data.Series.Remove(_seriesData);
+
+    }
 
     protected override void OnParametersSet()
     {
@@ -33,16 +46,8 @@
         _seriesData.Meta = Meta;
     }
 
-    // When we're first added to the UI, attach our data to parent
-    // When we're removed from the UI, remove our data from parent
-    [CascadingParameter]
-    public ChartistBar OwnerChart { get; set; }
-
     protected override void OnInitialized()
-        => OwnerChart.Data.Series.Add(_seriesData);
-
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "<Pending>")]
-    void IDisposable.Dispose()
-        => OwnerChart.Data.Series.Remove(_seriesData);
+    {
+        OwnerChart.Data.Series.Add(_seriesData);
+    }
 }

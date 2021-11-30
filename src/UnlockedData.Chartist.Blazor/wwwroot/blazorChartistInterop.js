@@ -1,7 +1,10 @@
 ﻿class BlazorChartist {
 
     createChart(type, elem, data, options, instance) {
+
+        //configure plugins if they are set
         options.plugins = [];
+
         if (options.showLegend) {
             options.plugins.push(Chartist.plugins.legend());
         }
@@ -10,8 +13,36 @@
             options.plugins.push(Chartist.plugins.tooltip());
         }
 
-        if (options.ShowPointLabels) {
+        if (options.showPointLabels) {
             options.plugins.push(Chartist.plugins.ctPointLabels());
+        }
+
+        if (options.useZoom) {
+            options.plugins.push(Chartist.plugins.zoom({
+                onZoom: function (chart, reset) {
+                    storeReset(reset);
+                }
+            }));
+        }
+
+        //configure axis options
+        if (type == "Line" || type == "Bar") {
+
+            options.axisX.labelInterpolationFnc = Chartist[options.axisX.labelInterpolationFnc];
+            options.axisY.labelInterpolationFnc = Chartist[options.axisY.labelInterpolationFnc];
+
+            options.axisX.type = Chartist[options.axisX.type];
+            options.axisY.type = Chartist[options.axisY.type];
+
+        }
+
+        if (type == "Line") {
+
+            //if the object is set to true or false then leave it
+            if (typeof (options.lineSmooth) == 'string') {
+                options.lineSmooth = Chartist.Interpolation[options.lineSmooth](options.interpolationOptions)
+            }
+
         }
 
 

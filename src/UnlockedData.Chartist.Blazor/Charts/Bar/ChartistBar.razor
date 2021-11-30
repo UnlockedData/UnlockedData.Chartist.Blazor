@@ -1,31 +1,48 @@
 ﻿@using Microsoft.JSInterop
 @using UnlockedData.Chartist.Blazor
 @using UnlockedData.Chartist.Blazor.Core.Data
+@using UnlockedData.Chartist.Blazor.Extensions
 @inherits UnlockedData.Chartist.Blazor.Core.ChartBase
-@namespace Chartist.Blazor.Charts
 
-<div @ref=elem class="ct-chart ct-golden-section" @attributes=ExtraAttributes></div>
+@inject IJSRuntime JS
 
-<CascadingValue Value="@this">
+@namespace UnlockedData.Chartist.Blazor.Charts
+
+<div class="chart-container">
+    <div @ref="elem" class="ct-chart @DisplayRatio.Description() @ClassForRotatedHorizontalLabels() chartist-smart " @attributes="ExtraAttributes"></div>
+</div>
+
+<CascadingValue Value="@(this)">
     @ChildContent
 </CascadingValue>
 
-@code
-{
-    [Inject]
-    private IJSRuntime JS { get; set; }
+@code {
+
+    [Parameter]
+    public DisplayRatio DisplayRatio { get; set; } = DisplayRatio.GoldenSection;
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public ExtendedChartData Data { get; set; } = new ExtendedChartData();
+    public ExtendedChartData Data { get; set; } = new();
 
     [Parameter]
-    public BarOptions Options { get; set; } = new BarOptions();
+    public BarOptions Options { get; set; } = new();
 
     [Parameter]
     public List<string> Labels { get; set; }
+
+    [Parameter]
+    public bool? Horizontal { get; set; } = null;
+
+    protected override void OnParametersSet()
+    {
+        if (Horizontal != null)
+        {
+            Options.HorizontalBars = Horizontal.Value;
+        }
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -37,11 +54,7 @@
             Data.Series.ForEach(s =>
                 s.SeriesPoints.ForEach(d => d.SwapPoints()));
 
-        if (firstRender)
-        {
-            await JS.InvokeVoidAsync("bizzyChartist.createChart", "Bar", elem, Data, Options, objectRef);
-        }
-
-        await JS.InvokeVoidAsync("bizzyChartist.updateChart", elem, Data, Options, objectRef);
+        await JS.InvokeVoidAsync("bizzyChartist.createChart", "Bar", elem, Data, Options, objectRef);
     }
+
 }

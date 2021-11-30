@@ -1,4 +1,6 @@
-﻿namespace UnlockedData.Chartist.Blazor {
+﻿using System.Text.Json.Serialization;
+
+namespace UnlockedData.Chartist.Blazor {
 
     /// <summary>
     /// Defines the Line Chart Options
@@ -49,14 +51,27 @@
 
         /// <summary>
         /// Gets or sets a value indicating whether the line should be smooth.
+        /// True will use the default smoothing function
+        /// You can also set other interpolation functions here by giving the name
+        /// of the function in the Chartist.Interpolation object, the jsinterop will take care of it
+        /// Options:
+        ///     none
+        ///     simple
+        ///     cardinal
+        ///     monotoneCubic
+        ///     step
+        /// 
         /// </summary>
         /// <value>
-        ///   <c>true</c> if the line should be smooth; otherwise, <c>false</c>.
+        ///   <c>true</c> if the line should be smooth; otherwise, <c>false</c> or one of the set functions.   
         /// </value>
         /// <remarks>
         /// Defaults to <c>true</c>
         /// </remarks>
-        public bool LineSmooth { get; set; } = true;
+        public dynamic LineSmooth { get; set; } = true;
+        
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public InterpolationOptions? InterpolationOptions { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the chart should be full width.

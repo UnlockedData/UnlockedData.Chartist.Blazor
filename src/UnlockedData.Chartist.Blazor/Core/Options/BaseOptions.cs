@@ -1,4 +1,6 @@
-﻿namespace UnlockedData.Chartist.Blazor
+﻿using System.Text.Json.Serialization;
+
+namespace UnlockedData.Chartist.Blazor
 {
     /// <summary>
     /// Defines a the basic options for all charts.
@@ -30,10 +32,7 @@
         /// <remarks>
         /// Default value is <c>false</c>
         /// </remarks>
-        public bool ReverseData { get; set; } = false;
-
-
-        /* TODO : commented out as current blazor will not allow serialisation options to be changed. Update it dotnet 5 (breaking change)
+        public bool ReverseData { get; set; } = false;       
        
         /// <summary>
         /// Gets or sets the width.
@@ -41,7 +40,8 @@
         /// <value>
         /// The width.
         /// </value>
-        public double? Width { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public dynamic Width { get; set; }
 
         /// <summary>
         /// Gets or sets the height.
@@ -49,7 +49,8 @@
         /// <value>
         /// The height.
         /// </value>
-        public double? Height { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public dynamic Height { get; set; }
 
         /// <summary>
         /// Gets or sets the high value.
@@ -57,6 +58,7 @@
         /// <value>
         /// The high value.
         /// </value>
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public double? High { get; set; }
 
         /// <summary>
@@ -65,8 +67,16 @@
         /// <value>
         /// The low value.
         /// </value>
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public double? Low { get; set; }
+        
+        
+        
+        public bool ShowLegend { get; set; } = false;
+        public bool ShowTooltips { get; set; } = false;
+        public bool ShowPointLabels { get; set; } = false;
+        public bool UseZoom { get; set; } = false;
 
-        */
+        
     }
 }
