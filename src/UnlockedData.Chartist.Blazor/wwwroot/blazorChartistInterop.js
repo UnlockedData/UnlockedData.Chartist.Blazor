@@ -68,7 +68,7 @@
             switch (type) {
                 case "Bar":
                     //each bar fires off
-                    document.querySelectorAll('.' + options.classNames.bar).forEach(function (item) {
+                    elem.querySelectorAll('.' + options.classNames.bar).forEach(function (item) {
                         item.addEventListener('click', function (e) {
                             e = bChartist.createChartistMouseEvents(e);
                             instance.invokeMethodAsync("JSDomDataPointClicked", e);
@@ -87,7 +87,7 @@
                     break;
                 case "Line":
                     //each point fires off
-                    document.querySelectorAll('.' + options.classNames.point).forEach(function (item) {
+                    elem.querySelectorAll('.' + options.classNames.point).forEach(function (item) {
                         item.addEventListener('click', function (e) {
                             e = bChartist.createChartistMouseEvents(e);
                             instance.invokeMethodAsync("JSDomDataPointClicked", e);
