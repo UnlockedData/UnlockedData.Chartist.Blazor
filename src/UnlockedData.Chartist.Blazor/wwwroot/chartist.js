@@ -4875,7 +4875,7 @@
 
                             var isPieChart = (chart instanceof Chartist.Pie) ? $point : $point.parentNode;
                             var seriesName = (isPieChart) ? $point.parentNode.getAttribute('ct-meta') || $point.parentNode.getAttribute('ct-series-name') : '';
-                            var meta = JSON.parse(bizzyChartist.decodeHTMLEntities($point.getAttribute('ct-meta'))).data.label || seriesName || '';
+                            var meta = JSON.parse(bChartist.decodeHTMLEntities($point.getAttribute('ct-meta'))).data.label || seriesName || '';
                             //console.log(meta)));
                             //var JSONparsed = JSON.parse(meta);
                             //var meta = $point.getAttribute('ct-meta') || seriesName || '';

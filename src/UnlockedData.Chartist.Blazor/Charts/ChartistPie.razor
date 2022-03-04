@@ -1,29 +1,26 @@
 ﻿@using Microsoft.JSInterop;
 @using Chartist.Blazor.Core.Data;
+@using UnlockedData.Chartist.Blazor.Extensions
 
 @inject IJSRuntime JS
 
-<div @ref="elem" class="ct-chart ct-golden-section" @attributes="@ExtraAttributes"></div>
-
-@* Pass 'this' instance as a cascading parameter to descendants in tree 
-<Microsoft.AspNetCore.Components.CascadingValue Value="@this">
-    @ChildContent
-</CascadingValue>
-*@
+<div class="chart-container">
+<div @ref="elem" class="ct-chart @DisplayRatio.Description() chartist-smart" @attributes="@ExtraAttributes"></div>
+</div>
 
 @code {
 
 
     ElementReference elem;
+    
+    [Parameter] 
+    public DisplayRatio DisplayRatio { get; set; } = DisplayRatio.Square;
 
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> ExtraAttributes { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-
-    //[Parameter]
-    //public ChartType Type { get; set; }
 
     [Parameter]
     public PieChartData Data { get; set; }
@@ -37,10 +34,10 @@
 
         if (firstRender)
         {
-            await JS.InvokeVoidAsync("bizzyChartist.createChart", "Pie", elem, Data, Options, objectRef);
+            await JS.InvokeVoidAsync("bChartist.createChart", "Pie", elem, Data, Options, objectRef);
         }
 
-        await JS.InvokeVoidAsync("bizzyChartist.updateChart", elem, Data, Options, objectRef);
+        await JS.InvokeVoidAsync("bChartist.updateChart", elem, Data, Options, objectRef);
 
 
     }

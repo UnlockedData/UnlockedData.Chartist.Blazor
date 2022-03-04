@@ -10,7 +10,7 @@
 @namespace UnlockedData.Chartist.Blazor.Charts
 
 <div class="chart-container">
-<div @ref="elem" class="ct-chart @DisplayRatio.Description() @ClassForRotatedHorizontalLabels() chartist-smart" @attributes="ExtraAttributes"></div>
+    <div @ref="elem" class="ct-chart @DisplayRatio.Description() @ClassForRotatedHorizontalLabels() chartist-smart" @attributes="ExtraAttributes" id="@_id"></div>
 </div>
 
 <CascadingValue Value="@(this)">
@@ -20,15 +20,22 @@
 @code {
 
 
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
-    [Parameter] public ExtendedChartData Data { get; set; } = new();
+    [Parameter]
+    public ExtendedChartData Data { get; set; } = new();
 
-    [Parameter] public LineOptions Options { get; set; } = new();
+    [Parameter]
+    public LineOptions Options { get; set; } = new();
 
-    [Parameter] public DisplayRatio DisplayRatio { get; set; } = DisplayRatio.GoldenSection;
+    [Parameter]
+    public DisplayRatio DisplayRatio { get; set; } = DisplayRatio.GoldenSection;
 
-    [Parameter] public List<string> Labels { get; set; }
+    [Parameter]
+    public List<string> Labels { get; set; }
+
+    string _id = "p" + Guid.NewGuid().ToString().Substring(0, 6);
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -36,9 +43,8 @@
 
         var objectRef = DotNetObjectReference.Create(this);
 
-        await JS.InvokeVoidAsync("bizzyChartist.createChart", "Line", elem, Data, Options, objectRef);
+        await JS.InvokeVoidAsync("bChartist.createChart", "Line", elem, Data, Options, objectRef, _id);
+    }
 
-    }    
-    
 
 }

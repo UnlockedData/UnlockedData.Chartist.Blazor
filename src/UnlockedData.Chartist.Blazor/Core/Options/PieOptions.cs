@@ -9,6 +9,11 @@ namespace UnlockedData.Chartist.Blazor;
 public class PieOptions : ChartBaseOptions
 {
     /// <summary>
+    /// Gets or sets the Full Width Property of the chart
+    /// </summary>
+    public bool FullWidth { get; set; } = false;
+    
+    /// <summary>
     /// Gets or sets the chart padding.
     /// </summary>
     /// <value>

@@ -9,7 +9,7 @@
 @namespace UnlockedData.Chartist.Blazor.Charts
 
 <div class="chart-container">
-    <div @ref="elem" class="ct-chart @DisplayRatio.Description() @ClassForRotatedHorizontalLabels() chartist-smart " @attributes="ExtraAttributes"></div>
+    <div @ref="elem" class="ct-chart @DisplayRatio.Description() @ClassForRotatedHorizontalLabels() chartist-smart " @attributes="ExtraAttributes" id="@_id"></div>
 </div>
 
 <CascadingValue Value="@(this)">
@@ -35,6 +35,8 @@
 
     [Parameter]
     public bool? Horizontal { get; set; } = null;
+    
+    string _id = "p" + Guid.NewGuid().ToString().Substring(0,6);
 
     protected override void OnParametersSet()
     {
@@ -52,9 +54,15 @@
 
         if (Options.HorizontalBars)
             Data.Series.ForEach(s =>
-                s.SeriesPoints.ForEach(d => d.SwapPoints()));
+            {
+                if (!s.Swapped)
+                {
+                    s.SeriesPoints.ForEach(d => d.SwapPoints());
+                }
+            });
 
-        await JS.InvokeVoidAsync("bizzyChartist.createChart", "Bar", elem, Data, Options, objectRef);
+
+        await JS.InvokeVoidAsync("bChartist.createChart", "Bar", elem, Data, Options, objectRef, _id);
     }
 
 }

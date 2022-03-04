@@ -1,7 +1,6 @@
 ﻿class BlazorChartist {
 
-    createChart(type, elem, data, options, instance) {
-
+    createChart(type, elem, data, options, instance, id) {
         //configure plugins if they are set
         options.plugins = [];
 
@@ -108,7 +107,7 @@
         chart.on('update', function () {
         });
 
-        elem['_chart'] = chart
+        elem['_chart'] = chart;
     };
 
     updateChart(elem, data, options, instance) {
