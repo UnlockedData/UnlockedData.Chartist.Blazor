@@ -967,3 +967,12 @@ svg.ct-chart-donut{
     transform: translate(-100%) rotate(-45deg);
     white-space:nowrap !important;
 }
+
+.rotate-horizontal-labels .ct-label.ct-label.ct-horizontal.ct-start {
+    position: relative !important;
+    justify-content: flex-start !important;
+    text-align: right !important;
+    transform-origin: 0% 0;
+    transform: translate(-50%) rotate(-45deg);
+    white-space:nowrap !important;
+}
