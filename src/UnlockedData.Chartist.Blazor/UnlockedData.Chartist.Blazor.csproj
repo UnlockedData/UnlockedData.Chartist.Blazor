@@ -19,8 +19,6 @@
   </ItemGroup>
 
 
-  <ItemGroup>
-    <Content Remove="wwwroot\chartist.min.js" />
-  </ItemGroup>
+  
 
 </Project>

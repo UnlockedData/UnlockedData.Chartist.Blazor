@@ -1,0 +1,159 @@
+﻿@page "/MultipleLineWithOverides"
+<h3>Multiple Line With Overides</h3>
+
+<ChartistLine Data="MultipleLineData" Options="DefaultLineOptions"/>
+
+
+@code {
+
+    private ExtendedChartData MultipleLineData { get; set; }
+    private LineOptions DefaultLineOptions { get; set; } = new()
+    {
+        SeriesOverrides = new Dictionary<string, LineOptions>()
+        {
+            {
+                "area", new LineOptions()
+                {
+                    ShowArea = true,
+                    ShowPoint = false,
+                    ShowLine = false
+                }
+            }
+        }
+    };
+
+    protected override void OnInitialized()
+    {
+        MultipleLineData = new ExtendedChartData()
+        {
+
+            Labels = new List<string>
+            {
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+            }
+
+        };
+
+
+        var dots = new SeriesData()
+        {
+            Name = "dots"
+
+        };
+
+        dots.SeriesPoints.Add(new SeriesPoint
+        {
+            X = null,
+            Y = 12,
+            Meta = new PointMetaInfo
+            {
+                Label = "Monday"
+            }
+        });
+        dots.SeriesPoints.Add(new SeriesPoint
+        {
+            X = null,
+            Y = 9,
+            Meta = new PointMetaInfo
+            {
+                Label = "Tuesday"
+            }
+        });
+        dots.SeriesPoints.Add(new SeriesPoint
+        {
+            X = null,
+            Y = 7,
+            Meta = new PointMetaInfo
+            {
+                Label = "Wednesday"
+            }
+        });
+        dots.SeriesPoints.Add(new SeriesPoint
+        {
+            X = null,
+            Y = 8,
+            Meta = new PointMetaInfo
+            {
+                Label = "Thursday"
+            }
+        });
+        dots.SeriesPoints.Add(new SeriesPoint
+        {
+            X = null,
+            Y = 5,
+            Meta = new PointMetaInfo
+            {
+                Label = "Friday"
+            }
+        });
+        MultipleLineData.Series.Add(dots);
+
+        var area = new SeriesData()
+        {
+            Name = "area"
+
+        };
+
+        area.SeriesPoints.Add(new SeriesPoint
+        {
+            X = null,
+            Y = 10,
+            Meta = new PointMetaInfo
+            {
+                Label = "Monday"
+            }
+        });
+        area.SeriesPoints.Add(new SeriesPoint
+        {
+            X = null,
+            Y = 5,
+            Meta = new PointMetaInfo
+            {
+                Label = "Tuesday"
+            }
+        });
+        area.SeriesPoints.Add(new SeriesPoint
+        {
+            X = null,
+            Y = 9,
+            Meta = new PointMetaInfo
+            {
+                Label = "Wednesday"
+            }
+        });
+        area.SeriesPoints.Add(new SeriesPoint
+        {
+            X = null,
+            Y = 1,
+            Meta = new PointMetaInfo
+            {
+                Label = "Thursday"
+            }
+        });
+        area.SeriesPoints.Add(new SeriesPoint
+        {
+            X = null,
+            Y = 3,
+            Meta = new PointMetaInfo
+            {
+                Label = "Friday"
+            }
+        });
+
+        MultipleLineData.Series.Add(area);
+
+
+
+    }
+
+
+
+
+
+
+
+}

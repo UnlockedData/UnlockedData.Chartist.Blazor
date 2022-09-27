@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace UnlockedData.Chartist.Blazor;
 
@@ -72,6 +73,10 @@ public class LineOptions : ExtendedChartBaseOptions
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public InterpolationOptions? InterpolationOptions { get; set; }
+    
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("series")]
+    public Dictionary<string,LineOptions>? SeriesOverrides { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the chart should be full width.
@@ -113,4 +118,6 @@ public class LineOptions : ExtendedChartBaseOptions
     /// Defaults to <c>false</c>
     /// </remarks>
     public bool IgnoreEmptyValues { get; set; } = false;
+    
+    
 }

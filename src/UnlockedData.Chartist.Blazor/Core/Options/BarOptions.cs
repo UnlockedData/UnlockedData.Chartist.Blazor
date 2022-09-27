@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 using UnlockedData.Chartist.Blazor.Extensions;
 
@@ -86,4 +87,8 @@ public class BarOptions : ExtendedChartBaseOptions
     /// The class names.
     /// </value>
     public BarHtmlNames ClassNames { get; set; } = new BarHtmlNames();
+    
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("series")]
+    public Dictionary<string,BarOptions>? SeriesOverrides { get; set; }
 }
