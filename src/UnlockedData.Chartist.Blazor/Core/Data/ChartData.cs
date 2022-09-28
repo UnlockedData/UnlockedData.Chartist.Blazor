@@ -13,5 +13,5 @@ public class ChartDataBase
     /// <value>
     /// The labels.
     /// </value>
-    public List<string> Labels { get; set; }
+    public List<string>? Labels { get; set; }
 }

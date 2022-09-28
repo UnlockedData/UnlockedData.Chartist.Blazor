@@ -8,6 +8,7 @@ namespace UnlockedData.Chartist.Blazor.Extensions;
 
 public static class EnumExtensions
 {
+    
     public static string Description<TEnum>(this TEnum e) where TEnum : IConvertible
     {
         if ((object) e is Enum)

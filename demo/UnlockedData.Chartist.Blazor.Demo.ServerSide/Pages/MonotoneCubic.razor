@@ -1,6 +1,6 @@
 ﻿@page "/monotoneCubic"
 
-<h3>Simple Line</h3>
+<h3>Monotone Cubic Interpolation Line</h3>
 
 <ChartistLine Data="SimpleLineData" Options="DefaultLineOptions" />
 
@@ -9,9 +9,9 @@
 @code {
 
     private ExtendedChartData SimpleLineData { get; set; }
-    private LineOptions DefaultLineOptions { get; set; } = new LineOptions()
+    private LineOptions DefaultLineOptions { get; } = new ()
     {
-        LineSmooth = "monotoneCubic"
+        InterpolationType = InterpolationType.Monotone
     };
     protected override void OnInitialized()
     {

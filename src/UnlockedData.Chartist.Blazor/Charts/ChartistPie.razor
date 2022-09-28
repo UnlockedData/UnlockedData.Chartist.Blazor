@@ -2,42 +2,26 @@
 @using Chartist.Blazor.Core.Data;
 @using UnlockedData.Chartist.Blazor.Extensions
 
-@inject IJSRuntime JS
+@inherits UnlockedData.Chartist.Blazor.Core.ChartBase;
 
 <div class="chart-container">
-<div @ref="elem" class="ct-chart @DisplayRatio.Description() chartist-smart" @attributes="@ExtraAttributes"></div>
+    <div @ref="Elem" class="ct-chart @DisplayRatio.Description() chartist-smart" />
 </div>
 
 @code {
-
-
-    ElementReference elem;
     
-    [Parameter] 
-    public DisplayRatio DisplayRatio { get; set; } = DisplayRatio.Square;
-
-    [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object> ExtraAttributes { get; set; }
+    [Parameter]
+    public PieOptions Options { get; set; } = new();
 
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
-
-    [Parameter]
-    public PieChartData Data { get; set; }
-
-    [Parameter]
-    public PieOptions Options { get; set; } = new PieOptions();
-
+    public PieChartData Data { get; set; } = new();
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         var objectRef = DotNetObjectReference.Create(this);
 
-        if (firstRender)
-        {
-            await JS.InvokeVoidAsync("bChartist.createChart", "Pie", elem, Data, Options, objectRef);
-        }
-
-        await JS.InvokeVoidAsync("bChartist.updateChart", elem, Data, Options, objectRef);
+       
+            await JS.InvokeVoidAsync("bChartist.createChart", "Pie", Elem, Data, Options, objectRef);
+        
 
 
     }

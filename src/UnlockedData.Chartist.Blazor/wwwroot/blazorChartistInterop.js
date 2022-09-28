@@ -1,51 +1,14 @@
 ﻿class BlazorChartist {
 
     createChart(type, elem, data, options, instance, id) {
+        
         //configure plugins if they are set
-        options.plugins = [];
+        
+        options = this.configurePlugins(options);        
+        options = this.optionsCleaner(type, options);
+        
 
-        if (options.showLegend) {
-            options.plugins.push(Chartist.plugins.legend());
-        }
-
-        if (options.showTooltips) {
-            options.plugins.push(Chartist.plugins.tooltip());
-        }
-
-        if (options.showPointLabels) {
-            options.plugins.push(Chartist.plugins.ctPointLabels());
-        }
-
-        if (options.useZoom) {
-            options.plugins.push(Chartist.plugins.zoom({
-                onZoom: function (chart, reset) {
-                    storeReset(reset);
-                }
-            }));
-        }
-
-        //configure axis options
-        if (type == "Line" || type == "Bar") {
-
-            options.axisX.labelInterpolationFnc = Chartist[options.axisX.labelInterpolationFnc];
-            options.axisY.labelInterpolationFnc = Chartist[options.axisY.labelInterpolationFnc];
-
-            options.axisX.type = Chartist[options.axisX.type];
-            options.axisY.type = Chartist[options.axisY.type];
-
-        }
-
-        if (type == "Line") {
-
-            //if the object is set to true or false then leave it
-            if (typeof (options.lineSmooth) == 'string') {
-                options.lineSmooth = Chartist.Interpolation[options.lineSmooth](options.interpolationOptions)
-            }
-
-        }
-
-
-        var chart;
+        let chart;
         bChartist.data = data;
         switch (type) {
             case "Bar":
@@ -60,6 +23,7 @@
         }
 
         chart.on('draw', function (data) {
+            
         });
 
         chart.on('created', function (data) {
@@ -79,8 +43,8 @@
                         item.addEventListener('mouseleave', function (e) {
                             e = bChartist.createChartistMouseEvents(e);
                             instance.invokeMethodAsync("JSDomDataPointExited", e);
-                        });
-                    });
+                        });                    });
+                    
                     break;
                 case "Pie":
                     break;
@@ -102,6 +66,10 @@
                     });
                     break;
             }
+            
+            options.cssClassUpdates.forEach(c=>{
+                elem.querySelectorAll(c.cssSelector).forEach(x=>x.classList.add(c.class));
+            })
         });
 
         chart.on('update', function () {
@@ -110,8 +78,9 @@
         elem['_chart'] = chart;
     };
 
-    updateChart(elem, data, options, instance) {
+    updateChart(elem, data, options) {
         bChartist.data = data;
+        options = this.optionsCleaner(options);
         elem['_chart'].update(data, options);
 
 
@@ -136,7 +105,86 @@
 
         return decodedString;
     }
+    
+    interpolationHelper(method) {
+        let result;        
+        switch (method) {
+            case "monotone":
+                result = Chartist.Interpolation.monotoneCubic;
+                break;
+            case "step":
+                result = Chartist.Interpolation.step;
+                break;
+            case "none":
+                result = Chartist.Interpolation.none;
+                break;
+            case "simple":
+                result = Chartist.Interpolation.simple;
+                break;
+            case "cardinal":
+                result = Chartist.Interpolation.cardinal;
+                break;
+                
+        }
+        
+        return result;
+    }
+    
+    optionsCleaner (type,options) {
+        
 
+
+        //configure axis options
+        if (type == "Line" || type == "Bar") {
+
+            options.axisX.labelInterpolationFnc = Chartist[options.axisX.labelInterpolationFnc];
+            options.axisY.labelInterpolationFnc = Chartist[options.axisY.labelInterpolationFnc];
+
+            options.axisX.type = Chartist[options.axisX.type];
+            options.axisY.type = Chartist[options.axisY.type];
+
+        }
+
+        if (type == "Line") {
+            options.lineSmooth = this.interpolationHelper(options.interpolationType)(options.interpolationOptions);
+
+        }
+        
+        return options
+
+    }
+    
+    configurePlugins (options) {
+        options.plugins = [];
+
+        if (options.showLegend) {
+            options.plugins.push(Chartist.plugins.legend());
+        }
+
+        if (options.showTooltips) {
+            options.plugins.push(Chartist.plugins.tooltip());
+        }
+
+        if (options.showPointLabels) {
+            options.plugins.push(Chartist.plugins.ctPointLabels());
+        }
+
+        if (options.useZoom) {
+            options.plugins.push(Chartist.plugins.zoom({
+                onZoom: function (chart, reset) {
+                    storeReset(reset);
+                }
+            }));
+        }
+        return options
+    }
+
+   
+    
+    appendElemToSvg(parentElem,elem) {
+        parentElem.append(elem);
+    }
 }
 
 window.bChartist = new BlazorChartist(); 
+

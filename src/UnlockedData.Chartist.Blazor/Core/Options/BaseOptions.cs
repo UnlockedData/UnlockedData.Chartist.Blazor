@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Microsoft.JSInterop;
 
 namespace UnlockedData.Chartist.Blazor;
 
@@ -75,4 +76,19 @@ public class ChartBaseOptions
     public bool ShowTooltips { get; set; } = false;
     public bool ShowPointLabels { get; set; } = false;
     public bool UseZoom { get; set; } = false;
+
+    /// <summary>
+    /// Use this to update elements in the dom with specific classes so they can be targeted by CSS
+    /// use nth-type-of
+    /// </summary>
+    public List<CssClassUpdate> CssClassUpdates { get; set; } = new List<CssClassUpdate>();
+    
+    [JsonPropertyName("a")]
+    public IJSObjectReference A { get; set; }
+}
+
+public class CssClassUpdate
+{
+    public string CssSelector { get; set; }
+    public string Class { get; set; }
 }

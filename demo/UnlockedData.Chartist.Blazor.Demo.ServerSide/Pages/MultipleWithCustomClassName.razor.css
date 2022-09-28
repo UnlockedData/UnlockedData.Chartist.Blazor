@@ -1,0 +1,21 @@
+::deep .custom-class-dots {
+    stroke: green;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 7s linear forwards;
+}
+
+::deep .custom-class-area {
+    fill: yellow;
+}
+
+::deep .custom-class-dots line.ct-point {
+    
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+    
+} 

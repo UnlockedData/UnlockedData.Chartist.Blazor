@@ -1,6 +1,6 @@
-﻿@page "/SimpleLine"
+﻿@page "/CardinalLine"
 
-<h3>Simple Line</h3>
+<h3>Cardinal Line</h3>
 
 <ChartistLine Data="_simpleLineData" Options="_defaultLineOptions" />
 
@@ -9,7 +9,7 @@
     ExtendedChartData _simpleLineData { get; set; }
     LineOptions _defaultLineOptions { get; set; } = new ()
     {
-        InterpolationType = InterpolationType.Simple
+        InterpolationType = InterpolationType.Cardinal
     };
 
     protected override void OnInitialized()

@@ -2,21 +2,21 @@
 
 <h3>Stepped Line</h3>
 
-<ChartistLine Data="SimpleLineData" Options="DefaultLineOptions" />
+<ChartistLine Data="@_simpleLineData" Options="@_defaultLineOptions" />
 
 
 
 @code {
 
-    private ExtendedChartData SimpleLineData { get; set; }
-    private LineOptions DefaultLineOptions { get; set; } = new LineOptions()
+    ExtendedChartData _simpleLineData { get; set; }
+    LineOptions _defaultLineOptions { get; set; } = new ()
     {
-        LineSmooth = "step"
+        InterpolationType = InterpolationType.Step
     };
 
     protected override void OnInitialized()
     {
-        SimpleLineData = new Core.Data.ExtendedChartData()
+        _simpleLineData = new ExtendedChartData()
         {
 
             Labels = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
@@ -30,7 +30,7 @@
             series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 7, Meta = new PointMetaInfo{ Label = "Wednesday"} });
             series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 8, Meta = new PointMetaInfo{ Label = "Thursday"} });
             series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 5, Meta = new PointMetaInfo{ Label = "Friday"} });
-            SimpleLineData.Series.Add(series);
+            _simpleLineData.Series.Add(series);
 
 
     }

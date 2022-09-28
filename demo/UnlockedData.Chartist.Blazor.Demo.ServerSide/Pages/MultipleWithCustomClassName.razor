@@ -1,7 +1,12 @@
-﻿@page "/MultipleLineWithOverides"
-<h3>Multiple Line With Overides</h3>
+﻿@page "/MultipleWithCustomClassName"
+@inject IJSRuntime _jsRuntime;
+<h3>Multiple With Custom Class Name</h3>
+There is a css file associtated with this that you can change the style of the below
+<div>
+<ChartistLine Data="MultipleLineData" Options="DefaultLineOptions"/>    
+</div>
 
-<ChartistLine Data="MultipleLineData" Options="DefaultLineOptions"/>
+
 
 
 @code {
@@ -11,13 +16,26 @@
     {
         SeriesOverrides = new Dictionary<string, LineOptions>()
         {
-            {
-                "area", new LineOptions()
+            {"area", new LineOptions()
                 {
                     ShowArea = true,
                     ShowPoint = false,
                     ShowLine = false
                 }
+            
+            },{
+                "dots", new LineOptions()
+                {
+                    ShowPoint = false
+                }
+            }
+        },
+        CssClassUpdates = new List<CssClassUpdate>()
+        {
+            new ()
+            {
+                CssSelector = ".custom-class-dots .ct-point:nth-of-type(1)",
+                Class = "special"
             }
         }
     };
@@ -42,8 +60,7 @@
         var dots = new SeriesData()
         {
             Name = "dots",
-            
-
+            ClassName = "custom-class-dots"
         };
 
         dots.SeriesPoints.Add(new SeriesPoint
@@ -95,7 +112,8 @@
 
         var area = new SeriesData()
         {
-            Name = "area"
+            Name = "area",
+        ClassName = "custom-class-area"
 
         };
 
@@ -150,8 +168,7 @@
 
 
     }
-
-
+    
 
 
 

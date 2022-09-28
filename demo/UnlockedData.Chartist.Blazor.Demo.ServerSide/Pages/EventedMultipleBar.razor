@@ -1,7 +1,7 @@
 ﻿@page "/EventedMultipleBar"
 
 <h3>Bar With Multiple Events</h3>
-<button @onclick="nullme" class="btn btn-primary">Remove First Value</button>
+<button @onclick="NullMe" class="btn btn-primary">Remove First Value</button>
 
 
 <br />
@@ -11,7 +11,7 @@
   <div class="input-group-prepend">
     <span class="input-group-text" id="fp-label">First Point Label:</span>
   </div>
-  <input type="text" class="form-control"  @bind-value=data.Labels[0] @bind-value:event="oninput">
+  <input type="text" class="form-control"  @bind-value=_data.Labels[0] @bind-value:event="oninput">
 </div>
 
 <br />
@@ -20,42 +20,37 @@
   <div class="input-group-prepend">
     <span class="input-group-text"id="fp-value" >First Point Value:</span>
   </div>
-  <input type="text"  class="form-control"  @bind-value=data.Series[0].SeriesPoints[0].Y @bind-value:event="oninput" />
+  <input type="text"  class="form-control"  @bind-value=_data.Series[0].SeriesPoints[0].Y @bind-value:event="oninput" />
 </div>
 
 
 <br />
 
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" @bind=hidePoint>
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" @bind=_hidePoint>
   <label class="form-check-label" for="defaultCheck1">
     Series 1? If not, then series 2
   </label>
 </div>
 
-<ChartistBar Options=options Labels=data.Labels>
+<ChartistBar Options=options Labels=_data.Labels>
 
-    <BarSeries Name=data.Series[seriesSel(hidePoint)].Name>
-        @foreach (var values in @data.Series[seriesSel(hidePoint)].SeriesPoints)
-        {            
-                <BarPoint X=values.X Y=values.Y Meta=values.Meta />            
-        }
-    </BarSeries>
+    <BarSeries Name=@_data.Series[SeriesSel(_hidePoint)].Name SeriesPoints="_data.Series[SeriesSel(_hidePoint)].SeriesPoints" />
 
 </ChartistBar>
 
 @code  {
-    private bool hidePoint = false;
-    private ExtendedChartData data;
-    private int seriesSel (bool value) {
+    private bool _hidePoint;
+    private ExtendedChartData _data;
+    private int SeriesSel (bool value) {
         if (value) {
             return 1;
         }
         return 0;
     }
 
-    private void nullme () {
-        data.Series[0].SeriesPoints[0].Y = 0;
+    private void NullMe () {
+        _data.Series[0].SeriesPoints[0].Y = 0;
     }
 
     private BarOptions options = new BarOptions ();
@@ -65,7 +60,7 @@
 
     protected override void OnInitialized () {
 
-        data = new Core.Data.ExtendedChartData () {
+        _data = new Core.Data.ExtendedChartData () {
             Labels = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
         };
         var series = new SeriesData ();
@@ -75,7 +70,7 @@
         series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 7, Meta = new PointMetaInfo { Label = "Wednesday" } });
         series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 8, Meta = new PointMetaInfo { Label = "Thursday" } });
         series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 5, Meta = new PointMetaInfo { Label = "Friday" } });
-        data.Series.Add (series);
+        _data.Series.Add (series);
         seriesToStrip = series;
 
         series = new SeriesData ();
@@ -85,19 +80,19 @@
         series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 2, Meta = new PointMetaInfo { Label = "Wednesday" } });
         series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 1, Meta = new PointMetaInfo { Label = "Thursday" } });
         series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 3, Meta = new PointMetaInfo { Label = "Friday" } });
-        data.Series.Add (series);
+        _data.Series.Add (series);
 
     }
 
     private void RemoveValue () {
 
-        data.Series[0].SeriesPoints.Remove (pointToStrip);
+        _data.Series[0].SeriesPoints.Remove (pointToStrip);
 
     }
 
     private void RemoveSeries () {
 
-        data.Series.Remove (seriesToStrip);
+        _data.Series.Remove (seriesToStrip);
     }
 
     

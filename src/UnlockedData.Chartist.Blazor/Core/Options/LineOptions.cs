@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using UnlockedData.Chartist.Blazor.Extensions;
 
 namespace UnlockedData.Chartist.Blazor;
 
@@ -40,7 +41,7 @@ public class LineOptions : ExtendedChartBaseOptions
     /// <remarks>
     /// Defaults to <c>false</c>
     /// </remarks>
-    public bool ShowArea { get; set; } = false;
+    public bool ShowArea { get; set; } 
 
     /// <summary>
     /// Gets or sets the area base.
@@ -69,14 +70,15 @@ public class LineOptions : ExtendedChartBaseOptions
     /// <remarks>
     /// Defaults to <c>true</c>
     /// </remarks>
-    public dynamic LineSmooth { get; set; } = true;
+    [JsonConverter(typeof(EnumAsStringCamelCaseConverter<InterpolationType>))]
+    public InterpolationType InterpolationType { get; set; } = InterpolationType.Monotone;
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public InterpolationOptions? InterpolationOptions { get; set; }
+    public InterpolationOptions InterpolationOptions { get; set; }
     
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("series")]
-    public Dictionary<string,LineOptions>? SeriesOverrides { get; set; }
+    public Dictionary<string,LineOptions> SeriesOverrides { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the chart should be full width.
@@ -120,4 +122,13 @@ public class LineOptions : ExtendedChartBaseOptions
     public bool IgnoreEmptyValues { get; set; } = false;
     
     
+}
+
+public enum InterpolationType
+{
+    None,
+    Simple,
+    Cardinal,
+    Monotone,
+    Step
 }

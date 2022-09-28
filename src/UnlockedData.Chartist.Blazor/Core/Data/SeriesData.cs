@@ -11,9 +11,10 @@ namespace UnlockedData.Chartist.Blazor.Core.Data
         public List<SeriesPoint> SeriesPoints {get; set;} = new List<SeriesPoint>();
 
         public string Name { get; set; } = "Series Not Named";
-
         public string Meta { get; set; } = "No Meta Info";
         
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string ClassName { get; set; }
         public bool Swapped { get; set; }
 
         

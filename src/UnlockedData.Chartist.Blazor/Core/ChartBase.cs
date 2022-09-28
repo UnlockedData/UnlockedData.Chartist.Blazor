@@ -1,17 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace UnlockedData.Chartist.Blazor.Core;
 
 public abstract class ChartBase : ComponentBase
 {
-    protected ElementReference elem;
-
-    [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object> ExtraAttributes { get; set; }
-
+    [Inject]
+    public IJSRuntime JS { get; set; }
+    
     [Parameter] public bool RotateHorizontalLabels { get; set; } = false;
 
     [Parameter] public EventCallback<ChartistMouseEventArgs> OnDataPointClicked { get; set; }
@@ -19,27 +15,45 @@ public abstract class ChartBase : ComponentBase
     [Parameter] public EventCallback<ChartistMouseEventArgs> OnDataPointEntered { get; set; }
 
     [Parameter] public EventCallback<ChartistMouseEventArgs> OnDataPointExited { get; set; }
+    
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    
+    [Parameter]
+    public RenderFragment Animations { get; set; }
+    
+    [Parameter]
+    public DisplayRatio DisplayRatio { get; set; } = DisplayRatio.GoldenSection;
+    
+    [Parameter]
+    public List<string> Labels { get; set; }
 
     [JSInvokable]
-    public virtual async Task JSDomDataPointClicked(ChartistMouseEventArgs args)
+    public async Task JSDomDataPointClicked(ChartistMouseEventArgs args)
     {
         await OnDataPointClicked.InvokeAsync(args);
     }
 
     [JSInvokable]
-    public virtual async Task JSDomDataPointEntered(ChartistMouseEventArgs args)
+    public async Task JSDomDataPointEntered(ChartistMouseEventArgs args)
     {
         await OnDataPointEntered.InvokeAsync(args);
     }
 
     [JSInvokable]
-    public virtual async Task JSDomDataPointExited(ChartistMouseEventArgs args)
+    public async Task JSDomDataPointExited(ChartistMouseEventArgs args)
     {
         await OnDataPointExited.InvokeAsync(args);
     }
 
-    protected virtual string ClassForRotatedHorizontalLabels()
+    protected string ClassForRotatedHorizontalLabels()
     {
         return RotateHorizontalLabels ? "rotate-horizontal-labels" : string.Empty;
     }
+    
+    protected ElementReference Elem;
+
+    protected string Id = "p" + Guid.NewGuid().ToString()[..6];
+    
+    
 }
