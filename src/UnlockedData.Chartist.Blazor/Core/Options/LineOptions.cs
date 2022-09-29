@@ -55,7 +55,7 @@ public class LineOptions : ExtendedChartBaseOptions
     /// The smoothing algorithm used to draw the line
     /// </summary>
     [JsonConverter(typeof(EnumAsStringCamelCaseConverter<InterpolationType>))]
-    public InterpolationType InterpolationType { get; set; } = InterpolationType.Monotone;
+    public InterpolationType InterpolationType { get; set; } = InterpolationType.Cardinal;
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public InterpolationOptions InterpolationOptions { get; set; }
