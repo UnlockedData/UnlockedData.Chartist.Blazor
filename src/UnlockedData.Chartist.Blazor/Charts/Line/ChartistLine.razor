@@ -10,7 +10,7 @@
     <div @ref="Elem" class="ct-chart @DisplayRatio.Description() @ClassForRotatedHorizontalLabels() chartist-smart" id="@Id"></div>
 </div>
 
-<CascadingValue Value="@(this)">
+<CascadingValue Value="@(this)" Name="OwnerChart">
     @ChildContent
 </CascadingValue>
 
@@ -27,11 +27,7 @@
 
         var objectRef = DotNetObjectReference.Create(this);
 
-      
-            await JS.InvokeVoidAsync("bChartist.createChart", "Line", Elem, Data, Options, objectRef, Id);
-           
-        
-        
+        await JS.InvokeVoidAsync("bChartist.createChart", "Line", Elem, Data, Options, objectRef, Id);
 
     }
 
