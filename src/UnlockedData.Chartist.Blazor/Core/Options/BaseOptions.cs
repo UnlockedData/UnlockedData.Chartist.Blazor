@@ -71,24 +71,28 @@ public class ChartBaseOptions
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public double? Low { get; set; }
 
+    
+    /// <summary>
+    /// Turn on legend plugin
+    /// </summary>
 
     public bool ShowLegend { get; set; } = false;
+    /// <summary>
+    /// Enable tooltips
+    /// </summary>
     public bool ShowTooltips { get; set; } = false;
+    /// <summary>
+    /// Enable point labels
+    /// </summary>
     public bool ShowPointLabels { get; set; } = false;
+    /// <summary>
+    /// enable zoom plugin
+    /// </summary>
     public bool UseZoom { get; set; } = false;
 
     /// <summary>
-    /// Use this to update elements in the dom with specific classes so they can be targeted by CSS
-    /// use nth-type-of
+    /// Use this to update elements in the SVG with specific classes so they can be targeted by CSS
     /// </summary>
     public List<CssClassUpdate> CssClassUpdates { get; set; } = new List<CssClassUpdate>();
     
-    [JsonPropertyName("a")]
-    public IJSObjectReference A { get; set; }
-}
-
-public class CssClassUpdate
-{
-    public string CssSelector { get; set; }
-    public string Class { get; set; }
 }

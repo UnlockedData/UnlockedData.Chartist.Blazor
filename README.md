@@ -30,11 +30,13 @@ For client-side and server-side Blazor - add script section to index.html or _La
 
 ### What's New
 
-- Override the options for line and bar chart series. 
+- Override the options for individual line and bar chart series.
+- Class names can now be applied to series, allowing targeting of CSS. There is a helper function object that allows html classes to be applied to specific created elements. See the example for both in action with a show of CSS animation 
 
 ### Known Issues
 
-- None for this release
+- Major refactor with some possible API changes. 
+- InterpolationType is now enum as opposed to string
 
 ### Bug Fixes
 
