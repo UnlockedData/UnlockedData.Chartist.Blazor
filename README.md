@@ -30,10 +30,7 @@ For client-side and server-side Blazor - add script section to index.html or _La
 
 ### What's New
 
-- New options have been enabled as JSON serializer options allow for ignoring null values
-- Line smoothing is now controllable using the bundled interpolation functions (as is axis labelling) 
-- Some plugins have been bundled. Legends, tooltips and point labels can be enabled on the charts by setting the relevant options flags
-
+- Override the options for line and bar chart series. 
 
 ### Known Issues
 
