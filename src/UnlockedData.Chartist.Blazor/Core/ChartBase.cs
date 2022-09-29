@@ -18,10 +18,7 @@ public abstract class ChartBase : ComponentBase
     
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-    
-    [Parameter]
-    public RenderFragment Animations { get; set; }
-    
+
     [Parameter]
     public DisplayRatio DisplayRatio { get; set; } = DisplayRatio.GoldenSection;
     

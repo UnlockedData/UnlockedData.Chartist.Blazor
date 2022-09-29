@@ -10,9 +10,6 @@
       <ProjectReference Include="..\..\src\UnlockedData.Chartist.Blazor\UnlockedData.Chartist.Blazor.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="UnlockedData.Extensions" Version="1.6.9" />
-    </ItemGroup>
 
     
 </Project>
