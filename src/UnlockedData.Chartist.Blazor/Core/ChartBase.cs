@@ -8,7 +8,7 @@ public abstract class ChartBase : ComponentBase
     [Inject]
     public IJSRuntime JS { get; set; }
     
-    [Parameter] public bool RotateHorizontalLabels { get; set; } = false;
+    [Parameter] public bool RotateHorizontalLabels { get; set; } 
 
     [Parameter] public EventCallback<ChartistMouseEventArgs> OnDataPointClicked { get; set; }
 
@@ -20,7 +20,7 @@ public abstract class ChartBase : ComponentBase
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public DisplayRatio DisplayRatio { get; set; } = DisplayRatio.GoldenSection;
+    public DisplayRatio DisplayRatio { get; set; }
     
     [Parameter]
     public List<string> Labels { get; set; }
@@ -35,6 +35,7 @@ public abstract class ChartBase : ComponentBase
     public async Task JSDomDataPointEntered(ChartistMouseEventArgs args)
     {
         await OnDataPointEntered.InvokeAsync(args);
+        
     }
 
     [JSInvokable]

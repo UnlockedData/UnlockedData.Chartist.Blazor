@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks.Dataflow;
-
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-
 using UnlockedData.Chartist.Blazor.Extensions;
 
 namespace UnlockedData.Chartist.Blazor
@@ -12,7 +10,7 @@ namespace UnlockedData.Chartist.Blazor
     /// <summary>
     /// Defines a chart's axis options
     /// </summary>
-    public class AxisOptions
+    public abstract class AxisOptions
     {
         #region properties
 
@@ -108,8 +106,8 @@ namespace UnlockedData.Chartist.Blazor
         /// </value>
         [JsonConverter(typeof(JsonStringEnumConverter))]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public AxisType? Type { get; set; } 
-        
+        public AxisType? Type { get; set; }
+
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Stretch { get; set; }
 
@@ -117,20 +115,23 @@ namespace UnlockedData.Chartist.Blazor
 
         #region factory load method
 
-        /// <summary>
-        /// Loads the specified axis with default values.
-        /// </summary>
-        /// <param name="axis">The axis.</param>
-        /// <returns><see cref="AxisOptions"/></returns>
-        public static AxisOptions Load(string axis) =>
-            axis switch
-            {
-                "y" => new AxisOptions {Position = LabelPosition.Start ,Type = null},
-                _ => new AxisOptions()
-            };
-
         #endregion
-    }    
+    }
 
-    
+    public class AxisYOptions : AxisOptions
+    {
+
+        public AxisYOptions()
+        {
+            Position = LabelPosition.Start;
+            Type = null;
+        }
+    };
+
+    public class AxisXOptions : AxisOptions
+    {
+        public AxisXOptions()
+        {
+        }
+    };
 }

@@ -7,7 +7,7 @@
 @namespace UnlockedData.Chartist.Blazor.Charts
 
 <div class="chart-container">
-    <div @ref="Elem" class="ct-chart @DisplayRatio.Description() @ClassForRotatedHorizontalLabels() chartist-smart" id="@Id"></div>
+    <div @ref="Elem" class="ct-chart @DisplayRatio.Description() @ClassForRotatedHorizontalLabels() " id="@Id"></div>
 </div>
 
 <CascadingValue Value="@(this)" Name="OwnerChart">

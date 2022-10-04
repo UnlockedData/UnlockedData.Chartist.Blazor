@@ -87,9 +87,20 @@
     };
 
     createChartistMouseEvents(e) {
+        let values = e.target.getAttribute('ct-value').split(',');
         let result = {
             pointMetaInfo: JSON.parse(bChartist.decodeHTMLEntities(e.target.getAttribute('ct-meta'))).data,
-            value: Number(e.target.getAttribute('ct-value')),
+            x: function() {
+                if (values.length === 2) {
+                    return Number(values[0]);
+                }
+            }(),
+            y: function() {
+                if (values.length === 2) {
+                    return Number(values[1]);
+                }
+                return Number(values[0]);
+            }(),               
             seriesName: e.target.parentElement.getAttribute('ct-series-name')
         };
 

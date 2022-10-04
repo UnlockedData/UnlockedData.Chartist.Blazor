@@ -8,7 +8,7 @@
 {
     ExtendedChartData HorizontalBarData { get; set; }
 
-    BarOptions HorizontalOptions { get; set; } = new BarOptions {HorizontalBars = true};
+    BarOptions HorizontalOptions { get; set; } = new BarOptions {HorizontalBars = true,AxisY = new AxisYOptions(){Offset = 100}};
 
     protected override void OnInitialized()
     {

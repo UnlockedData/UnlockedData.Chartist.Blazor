@@ -2,10 +2,10 @@
 
 <h3>Plugins Activated</h3>
 
-<ChartistBar Options=@options Labels=@data.Labels Data="@data">
+<ChartistBar Options=@options Labels=@data.Labels>
     @foreach (var seriesData in data.Series)
     {
-        <BarSeries Name=@seriesData.Name />
+        <BarSeries Name=@seriesData.Name SeriesPoints="seriesData.SeriesPoints" />
     }
 </ChartistBar>
 
@@ -26,10 +26,7 @@
         };        
  
         protected override async Task OnInitializedAsync()
-        {          
-
-            
-            
+        {
             var series = new SeriesData();
             series.Name = "Week 1";
             series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 12, Meta = new PointMetaInfo { Label = "Monday"} });

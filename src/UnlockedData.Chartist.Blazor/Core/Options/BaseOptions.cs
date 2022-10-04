@@ -14,7 +14,7 @@ public class ChartBaseOptions
     /// <value>
     /// The axis y axis options.
     /// </value>
-    public AxisOptions AxisX { get; set; } = AxisOptions.Load("x");
+    public AxisOptions AxisX { get; set; } = new AxisXOptions();
 
     /// <summary>
     /// Gets or sets the y axis options.
@@ -22,7 +22,7 @@ public class ChartBaseOptions
     /// <value>
     /// The y axis options.
     /// </value>
-    public AxisOptions AxisY { get; set; } = AxisOptions.Load("y");
+    public AxisOptions AxisY { get; set; } = new AxisYOptions();
 
     /// <summary>
     /// Gets or sets a value indicating whether the data should be reversed.
