@@ -16,6 +16,8 @@
 
 @code {
 
+    DotNetObjectReference<ChartistLine> _objRef;
+
     [Parameter]
     public LineOptions Options { get; set; } = new();
     
@@ -25,9 +27,17 @@
     {
         Data.Labels = Labels ?? Data.Labels;
 
-        var objectRef = DotNetObjectReference.Create(this);
+        
+        if (firstRender)
+        {
+            _objRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("bChartist.createChart", "Line", Elem, Data, Options, _objRef, Id);
+        }
 
-        await JS.InvokeVoidAsync("bChartist.createChart", "Line", Elem, Data, Options, objectRef, Id);
+        else
+        {
+            await JS.InvokeVoidAsync("bChartist.updateChart", Elem, Data, Options);
+        }
 
     }
 

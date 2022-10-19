@@ -1,0 +1,106 @@
+﻿@page "/EventedMultipleBarHorizontal"
+
+<h3>Bar With Multiple Events</h3>
+<button @onclick="NullMe" class="btn btn-primary">Remove First Value</button>
+
+
+<br />
+<br />
+
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="fp-label">First Point Label:</span>
+  </div>
+  <input type="text" class="form-control" @bind-value=_data.Labels[0] @bind-value:event="oninput">
+</div>
+
+<br />
+
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text"id="fp-value" >First Point Value:</span>
+  </div>
+  <input type="text"  class="form-control"  @bind-value=_data.Series[0].SeriesPoints[0].X @bind-value:event="oninput" />
+</div>
+
+
+<br />
+
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" @bind=_hidePoint>
+  <label class="form-check-label" for="defaultCheck1">
+    Series 1? If not, then series 2
+  </label>
+</div>
+
+<ChartistBar Options="options" Labels="_data.Labels">
+
+    <BarSeries Name="@_data.Series[SeriesSel(_hidePoint)].Name" SeriesPoints="_data.Series[SeriesSel(_hidePoint)].SeriesPoints" />
+
+</ChartistBar>
+
+@code  {
+    bool _hidePoint;
+    ExtendedChartData _data;
+    SeriesData _seriesToStrip;
+    readonly SeriesPoint _pointToStrip = new SeriesPoint { X = null, Y = 12, Meta = new PointMetaInfo { Label = "Monday" } };
+    static int SeriesSel (bool value)
+    {
+        return value ? 1 : 0;
+    }
+
+    void NullMe () {
+        _data.Series[0].SeriesPoints[0].X = 0;
+    }
+
+    BarOptions options = new BarOptions ()
+    {
+        HorizontalBars = true,
+        ReverseData = true,
+        AxisY = new AxisYOptions()
+        {
+            Offset = 90
+        }
+    };
+
+    void RemoveValue () {
+
+        _data.Series[0].SeriesPoints.Remove (_pointToStrip);
+    }
+
+    void RemoveSeries () {
+
+        _data.Series.Remove (_seriesToStrip);
+    }
+
+    protected override void OnInitialized () {
+
+        _data = new ExtendedChartData () {
+            Labels = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
+        };
+        var series = new SeriesData
+        {
+            Name = "Series 1"
+        };
+        series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 12, Meta = new PointMetaInfo { Label = "Monday" } });
+        series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 9, Meta = new PointMetaInfo { Label = "Tuesday" } });
+        series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 7, Meta = new PointMetaInfo { Label = "Wednesday" } });
+        series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 8, Meta = new PointMetaInfo { Label = "Thursday" } });
+        series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 5, Meta = new PointMetaInfo { Label = "Friday" } });
+        _data.Series.Add (series);
+        _seriesToStrip = series;
+
+        series = new SeriesData
+        {
+            Name = "Series 2"
+        };
+        series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 9, Meta = new PointMetaInfo { Label = "Monday" } });
+        series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 4, Meta = new PointMetaInfo { Label = "Tuesday" } });
+        series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 2, Meta = new PointMetaInfo { Label = "Wednesday" } });
+        series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 1, Meta = new PointMetaInfo { Label = "Thursday" } });
+        series.SeriesPoints.Add (new SeriesPoint { X = null, Y = 3, Meta = new PointMetaInfo { Label = "Friday" } });
+        _data.Series.Add (series);
+
+    }
+    
+}

@@ -15,12 +15,18 @@
 
     [Parameter]
     public PieChartData Data { get; set; } = new();
+    
+    DotNetObjectReference<ChartistPie> _objRef;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         var objectRef = DotNetObjectReference.Create(this);
 
-       
-            await JS.InvokeVoidAsync("bChartist.createChart", "Pie", Elem, Data, Options, objectRef);
+        if (firstRender)
+        {
+            _objRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("bChartist.createChart", "Pie", Elem, Data, Options, _objRef);
+        }
+           
         
 
 

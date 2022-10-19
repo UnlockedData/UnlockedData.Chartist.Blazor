@@ -9,7 +9,7 @@
         
 
         let chart;
-        bChartist.data = data;
+        
         switch (type) {
             case "Bar":
                 chart = Chartist.Bar(elem, data, options);
@@ -79,7 +79,7 @@
     };
 
     updateChart(elem, data, options) {
-        bChartist.data = data;
+        
         options = this.optionsCleaner(options);
         elem['_chart'].update(data, options);
 

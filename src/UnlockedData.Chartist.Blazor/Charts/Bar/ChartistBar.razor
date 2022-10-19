@@ -21,6 +21,8 @@
 
     [Parameter]
     public ExtendedChartData Data { get; set; } = new();
+    
+    DotNetObjectReference<ChartistBar> _objRef;
 
     [Parameter]
     public bool? Horizontal { get; set; }
@@ -35,7 +37,7 @@
     {
             Data.Labels = Labels ?? Data.Labels;
 
-            var objectRef = DotNetObjectReference.Create(this);
+            
 
             if (Options.HorizontalBars)
                 Data.Series.ForEach(s =>
@@ -46,8 +48,17 @@
                     }
                 });
 
+        if (firstRender)
+        {
+            _objRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("bChartist.createChart", "Bar", Elem, Data, Options, _objRef);
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("bChartist.updateChart", Elem, Data, Options);
+        }
            
-                await JS.InvokeVoidAsync("bChartist.createChart", "Bar", Elem, Data, Options, objectRef);
+               
             
          
         
