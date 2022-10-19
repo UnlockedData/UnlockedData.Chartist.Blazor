@@ -169,7 +169,7 @@
         options.plugins = [];
 
         if (options.showLegend) {
-            options.plugins.push(Chartist.plugins.legend());
+            options.plugins.push(Chartist.plugins.legend(options.legendOptions));
         }
 
         if (options.showTooltips) {

@@ -23,13 +23,7 @@ public partial class BarSeries : ComponentBase, IDisposable
     protected override void OnParametersSet()
     {
         var seriesPoints = SeriesPoints.ToList();
-        
-        if (OwnerChart.Options.HorizontalBars)
-        {
-            seriesPoints.ForEach(d => d.SwapPoints());
-            _seriesData.Swapped = true;
-        }
-              
+
         _seriesData.Name = Name;
         _seriesData.SeriesPoints = seriesPoints;
         _seriesData.Meta = Meta;

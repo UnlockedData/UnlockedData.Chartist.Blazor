@@ -24,29 +24,9 @@
     
     DotNetObjectReference<ChartistBar> _objRef;
 
-    [Parameter]
-    public bool? Horizontal { get; set; }
-    protected override void OnParametersSet() 
-    {
-        if (Horizontal is not null)
-        {
-            Options.HorizontalBars = Horizontal.Value;
-        }
-    }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-            Data.Labels = Labels ?? Data.Labels;
-
-            
-
-            if (Options.HorizontalBars)
-                Data.Series.ForEach(s =>
-                {
-                    if (!s.Swapped)
-                    {
-                        s.SeriesPoints.ForEach(d => d.SwapPoints());
-                    }
-                });
+        Data.Labels = Labels ?? Data.Labels;
 
         if (firstRender)
         {
@@ -57,10 +37,6 @@
         {
             await JS.InvokeVoidAsync("bChartist.updateChart", Elem, Data, Options);
         }
-           
-               
-            
-         
         
         
     }

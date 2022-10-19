@@ -77,6 +77,8 @@ public class ChartBaseOptions
     /// </summary>
 
     public bool ShowLegend { get; set; } = false;
+    public LegendOptions LegendOptions { get; set; }= new ();
+    
     /// <summary>
     /// Enable tooltips
     /// </summary>
@@ -94,5 +96,7 @@ public class ChartBaseOptions
     /// Use this to update elements in the SVG with specific classes so they can be targeted by CSS
     /// </summary>
     public List<CssClassUpdate> CssClassUpdates { get; set; } = new List<CssClassUpdate>();
+
     
+
 }
