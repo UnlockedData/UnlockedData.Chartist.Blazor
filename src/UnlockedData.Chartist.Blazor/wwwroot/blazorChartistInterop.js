@@ -151,7 +151,7 @@
         //configure axis options
         if (type == "Line" || type == "Bar") {
 
-            options.axisX.labelInterpolationFnc = this.labelInterpolationFunctions[options.axisX.labelInterpolationFnc];
+            options.axisX.labelInterpolationFnc = this.labelInterpolationFunctions.noop;
             options.axisY.labelInterpolationFnc = this.labelInterpolationFunctions[options.axisY.labelInterpolationFnc];
 
             options.axisX.type = Chartist[options.axisX.type];
