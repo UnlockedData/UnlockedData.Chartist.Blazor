@@ -115,10 +115,10 @@
             let decodedString = dom.body.textContent;
             return decodedString;
         }
-        
+
         return str;
 
-        
+
     }
 
     interpolationHelper(method) {
@@ -147,11 +147,10 @@
 
     optionsCleaner(type, options) {
 
-
         //configure axis options
         if (type == "Line" || type == "Bar") {
 
-            options.axisX.labelInterpolationFnc = this.labelInterpolationFunctions.noop;
+            options.axisX.labelInterpolationFnc = this.labelInterpolationFunctions[options.axisX.labelInterpolationFnc];
             options.axisY.labelInterpolationFnc = this.labelInterpolationFunctions[options.axisY.labelInterpolationFnc];
 
             options.axisX.type = Chartist[options.axisX.type];
@@ -193,25 +192,13 @@
     }
 
     labelInterpolationFunctions = {
-        truncatetokmb: function (value) {
-            return Math.abs(Number(value)) >= 1.0e+9
-
-                ? Math.abs(Number(value)) / 1.0e+9 + "B"
-                // Six Zeroes for Millions 
-                : Math.abs(Number(value)) >= 1.0e+6
-
-                    ? Math.abs(Number(value)) / 1.0e+6 + "M"
-                    // Three Zeroes for Thousands
-                    : Math.abs(Number(value)) >= 1.0e+3
-
-                        ? Math.abs(Number(value)) / 1.0e+3 + "K"
-
-                        : Math.abs(Number(value));
+        truncateToKMB: function (value) {
+            return Math.abs(Number(value)) >= 1.0e+9 ? Math.abs(Number(value)) / 1.0e+9 + "B" : 
+                Math.abs(Number(value)) >= 1.0e+6 ? Math.abs(Number(value)) / 1.0e+6 + "M" : 
+                    Math.abs(Number(value)) >= 1.0e+3 ? Math.abs(Number(value)) / 1.0e+3 + "K" : Math.abs(Number(value));
         },
         noop: Chartist.noop
     }
-
-   
 
 
     appendElemToSvg(parentElem, elem) {

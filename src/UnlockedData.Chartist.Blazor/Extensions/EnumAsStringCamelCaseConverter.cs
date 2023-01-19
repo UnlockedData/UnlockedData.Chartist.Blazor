@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -14,28 +15,24 @@ public class EnumAsStringCamelCaseConverter<T> : JsonConverter<T> where T : ICom
 
     public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
     {
-        var result = value.ToString();
-        // If there are 0 or 1 characters, just return the string.
-        if (result == null || result.Length < 2)
-        {
-            writer.WriteStringValue(result);
-            return;
-        }
-        // Split the string into words.
-        
-        var words = result.Split(
-            new char[] { },
-            StringSplitOptions.RemoveEmptyEntries);
+        var result = System.Text.RegularExpressions.Regex.Replace(value.ToString(), "([A-Z])", " $1", System.Text.RegularExpressions.RegexOptions.Compiled).Trim();
+        var words = result.Split(new[] { "_", " " }, StringSplitOptions.RemoveEmptyEntries);
+        var leadWord = words[0].ToLower();
+        var tailWords = words.Skip(1)
+            .Select(word => (char.ToUpper(word[0]) + word.Substring(1)))
+            .ToArray();
 
-        // Combine the words.
-        var sb = new StringBuilder(words[0].ToLower());
-        for (var i = 1; i < words.Length; i++)
+        var bld = new StringBuilder();
+        bld.Append(leadWord);
+        if (tailWords.Any())
         {
-            sb.Append(words[i].Substring(0, 1).ToUpper() +
-                      words[i].Substring(1));
-
+            foreach (var word in tailWords)
+            {
+                bld.Append(word.Trim());
+            }
+            
         }
-        
-        writer.WriteStringValue(sb.ToString());
+
+        writer.WriteStringValue(bld.ToString());
     }
 }
