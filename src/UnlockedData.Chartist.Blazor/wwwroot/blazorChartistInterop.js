@@ -1,15 +1,15 @@
 ﻿class BlazorChartist {
 
     createChart(type, elem, data, options, instance, id) {
-        
+
         //configure plugins if they are set
-        
-        options = this.configurePlugins(options);        
+
+        options = this.configurePlugins(options);
         options = this.optionsCleaner(type, options);
-        
+
 
         let chart;
-        
+
         switch (type) {
             case "Bar":
                 chart = Chartist.Bar(elem, data, options);
@@ -23,7 +23,7 @@
         }
 
         chart.on('draw', function (data) {
-            
+
         });
 
         chart.on('created', function (data) {
@@ -43,8 +43,9 @@
                         item.addEventListener('mouseleave', function (e) {
                             e = bChartist.createChartistMouseEvents(e);
                             instance.invokeMethodAsync("JSDomDataPointExited", e);
-                        });                    });
-                    
+                        });
+                    });
+
                     break;
                 case "Pie":
                     break;
@@ -66,9 +67,9 @@
                     });
                     break;
             }
-            
-            options.cssClassUpdates.forEach(c=>{
-                elem.querySelectorAll(c.cssSelector).forEach(x=>x.classList.add(c.class));
+
+            options.cssClassUpdates.forEach(c => {
+                elem.querySelectorAll(c.cssSelector).forEach(x => x.classList.add(c.class));
             })
         });
 
@@ -79,7 +80,7 @@
     };
 
     updateChart(elem, data, options) {
-        
+
         options = this.optionsCleaner(options);
         elem['_chart'].update(data, options);
 
@@ -90,17 +91,17 @@
         let values = e.target.getAttribute('ct-value').split(',');
         let result = {
             pointMetaInfo: JSON.parse(bChartist.decodeHTMLEntities(e.target.getAttribute('ct-meta'))).data,
-            x: function() {
+            x: function () {
                 if (values.length === 2) {
                     return Number(values[0]);
                 }
             }(),
-            y: function() {
+            y: function () {
                 if (values.length === 2) {
                     return Number(values[1]);
                 }
                 return Number(values[0]);
-            }(),               
+            }(),
             seriesName: e.target.parentElement.getAttribute('ct-series-name')
         };
 
@@ -109,16 +110,19 @@
 
     decodeHTMLEntities(str) {
         if (str && typeof str === 'string') {
-            var parser = new DOMParser;
-            var dom = parser.parseFromString(str, 'text/html');
-            var decodedString = dom.body.textContent;
+            let parser = new DOMParser;
+            let dom = parser.parseFromString(str, 'text/html');
+            let decodedString = dom.body.textContent;
+            return decodedString;
         }
+        
+        return str;
 
-        return decodedString;
+        
     }
-    
+
     interpolationHelper(method) {
-        let result;        
+        let result;
         switch (method) {
             case "monotone":
                 result = Chartist.Interpolation.monotoneCubic;
@@ -135,37 +139,35 @@
             case "cardinal":
                 result = Chartist.Interpolation.cardinal;
                 break;
-                
+
         }
-        
+
         return result;
     }
-    
-    optionsCleaner (type,options) {
-        
+
+    optionsCleaner(type, options) {
 
 
         //configure axis options
         if (type == "Line" || type == "Bar") {
 
-            options.axisX.labelInterpolationFnc = Chartist[options.axisX.labelInterpolationFnc];
-            options.axisY.labelInterpolationFnc = Chartist[options.axisY.labelInterpolationFnc];
+            options.axisX.labelInterpolationFnc = this.labelInterpolationFunctions[options.axisX.labelInterpolationFnc];
+            options.axisY.labelInterpolationFnc = this.labelInterpolationFunctions[options.axisY.labelInterpolationFnc];
 
             options.axisX.type = Chartist[options.axisX.type];
             options.axisY.type = Chartist[options.axisY.type];
-
         }
 
         if (type == "Line") {
             options.lineSmooth = this.interpolationHelper(options.interpolationType)(options.interpolationOptions);
 
         }
-        
+
         return options
 
     }
-    
-    configurePlugins (options) {
+
+    configurePlugins(options) {
         options.plugins = [];
 
         if (options.showLegend) {
@@ -190,9 +192,29 @@
         return options
     }
 
+    labelInterpolationFunctions = {
+        truncatetokmb: function (value) {
+            return Math.abs(Number(value)) >= 1.0e+9
+
+                ? Math.abs(Number(value)) / 1.0e+9 + "B"
+                // Six Zeroes for Millions 
+                : Math.abs(Number(value)) >= 1.0e+6
+
+                    ? Math.abs(Number(value)) / 1.0e+6 + "M"
+                    // Three Zeroes for Thousands
+                    : Math.abs(Number(value)) >= 1.0e+3
+
+                        ? Math.abs(Number(value)) / 1.0e+3 + "K"
+
+                        : Math.abs(Number(value));
+        },
+        noop: Chartist.noop
+    }
+
    
-    
-    appendElemToSvg(parentElem,elem) {
+
+
+    appendElemToSvg(parentElem, elem) {
         parentElem.append(elem);
     }
 }

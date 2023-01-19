@@ -45,7 +45,8 @@ namespace UnlockedData.Chartist.Blazor
         /// <summary>
         /// You can supply a function name for this that exists on the Chartist object
         /// </summary>
-        public string? LabelInterpolationFnc { get; set; } = "noop";
+        [JsonConverter(typeof(EnumAsStringCamelCaseConverter<LabelInterpolationOption>))]
+        public LabelInterpolationOption LabelInterpolationFnc { get; set; } = LabelInterpolationOption.TruncateToKMB;
 
         /// <summary>
         /// Gets or sets a value indicating whether to show labels.
