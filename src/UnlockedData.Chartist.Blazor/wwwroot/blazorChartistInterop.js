@@ -73,15 +73,17 @@
             })
         });
 
-        chart.on('update', function () {
+        chart.on('update', function (data, options) {
+           
         });
 
         elem['_chart'] = chart;
     };
 
-    updateChart(elem, data, options) {
-
-        options = this.optionsCleaner(options);
+    updateChart(type, elem, data, options) {
+        
+        options = this.configurePlugins(options);
+        options = this.optionsCleaner(type, options);
         elem['_chart'].update(data, options);
 
 
