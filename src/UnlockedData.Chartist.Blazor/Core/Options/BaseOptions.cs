@@ -83,6 +83,8 @@ public class ChartBaseOptions
     /// Enable tooltips
     /// </summary>
     public bool ShowTooltips { get; set; } = false;
+    public ToolTipOptions ToolTipOptions { get; set; }= new ();
+
     /// <summary>
     /// Enable point labels
     /// </summary>
@@ -91,7 +93,6 @@ public class ChartBaseOptions
     /// enable zoom plugin
     /// </summary>
     public bool UseZoom { get; set; } = false;
-
     /// <summary>
     /// Use this to update elements in the SVG with specific classes so they can be targeted by CSS
     /// </summary>

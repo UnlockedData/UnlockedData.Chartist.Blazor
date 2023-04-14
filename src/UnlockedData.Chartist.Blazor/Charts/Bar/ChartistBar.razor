@@ -27,18 +27,14 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         Data.Labels = Labels ?? Data.Labels;
-
-        if (firstRender)
-        {
-            _objRef = DotNetObjectReference.Create(this);
-            await JS.InvokeVoidAsync("bChartist.createChart", "Bar", Elem, Data, Options, _objRef);
-        }
-        else
-        {
-            await JS.InvokeVoidAsync("bChartist.updateChart", "Bar", Elem, Data, Options);
-        }
         
+        _objRef = DotNetObjectReference.Create(this);
+        await JS.InvokeVoidAsync("bChartist.createChart", "Bar", Elem, Data, Options, _objRef);
         
     }
+    
+    
+
+
 
 }

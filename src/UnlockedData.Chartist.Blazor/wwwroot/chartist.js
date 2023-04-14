@@ -4826,14 +4826,21 @@
                     anchorToPoint: false,
                     appendToBody: false,
                     class: undefined,
-                    pointClass: 'ct-point'
+                    pointClass: 'ct-point',
+                    showSeriesName: false
                 };
-
+                
+                
                 Chartist.plugins = Chartist.plugins || {};
                 Chartist.plugins.tooltip = function (options) {
                     options = Chartist.extend({}, defaultOptions, options);
 
                     return function tooltip(chart) {
+                        
+                        //set options where included in toolTipOptions
+                        options.currency = chart.options.toolTipOptions?.currency;
+                        options.showSeriesName = chart.options.toolTipOptions?.showSeriesName;
+
                         var tooltipSelector = options.pointClass;
                         if (chart.constructor.name == Chartist.Bar.prototype.constructor.name) {
                             tooltipSelector = 'ct-bar';
@@ -4876,14 +4883,21 @@
                             var isPieChart = (chart instanceof Chartist.Pie) ? $point : $point.parentNode;
                             var seriesName = (isPieChart) ? $point.parentNode.getAttribute('ct-meta') || $point.parentNode.getAttribute('ct-series-name') : '';
                             var meta = JSON.parse(bChartist.decodeHTMLEntities($point.getAttribute('ct-meta'))).data.label || seriesName || '';
+                            
+                            // if user wants series Name of parent node shown instead of x-axis label
+                            meta = options.showSeriesName ? event.target.parentNode.getAttribute('ct-series-name') ?? meta : meta;
+                            
                             //console.log(meta)));
                             //var JSONparsed = JSON.parse(meta);
                             //var meta = $point.getAttribute('ct-meta') || seriesName || '';
 
-
                             var hasMeta = !!meta;
                             var value = $point.getAttribute('ct-value');
-
+                            
+                            // for stacked bar, take the second value given from ct-value
+                            const values = value.split(",");
+                            value = values.length > 1 ? values[1].trim() : values[0].trim();
+                            
                             if (options.transformTooltipTextFnc && typeof options.transformTooltipTextFnc === 'function') {
                                 value = options.transformTooltipTextFnc(value);
                             }
@@ -4901,6 +4915,7 @@
 
                                 if (hasMeta) {
                                     tooltipText += meta + '<br>';
+                                    console.log(meta);
                                 } else {
                                     // For Pie Charts also take the labels into account
                                     // Could add support for more charts here as well!
