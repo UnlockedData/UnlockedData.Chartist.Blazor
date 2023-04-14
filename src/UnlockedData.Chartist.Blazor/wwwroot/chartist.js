@@ -4915,7 +4915,6 @@
 
                                 if (hasMeta) {
                                     tooltipText += meta + '<br>';
-                                    console.log(meta);
                                 } else {
                                     // For Pie Charts also take the labels into account
                                     // Could add support for more charts here as well!
