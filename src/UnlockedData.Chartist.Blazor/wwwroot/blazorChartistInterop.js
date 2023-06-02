@@ -3,9 +3,9 @@
     createChart(type, elem, data, options, instance, id) {
 
         //configure plugins if they are set
-
-        options = this.configurePlugins(options);
         options = this.optionsCleaner(type, options);
+        options = this.configurePlugins(options);
+        
 
 
         let chart;
@@ -163,7 +163,11 @@
             options.lineSmooth = this.interpolationHelper(options.interpolationType)(options.interpolationOptions);
 
         }
-
+        if (options.toolTipOptions.transformTooltipTextFunction != undefined) {
+            options.toolTipOptions.transformTooltipTextFnc = this.labelInterpolationFunctions[options.toolTipOptions.transformTooltipTextFunction]
+        }
+        
+            
         return options
 
     }
@@ -175,8 +179,13 @@
             options.plugins.push(Chartist.plugins.legend(options.legendOptions));
         }
 
+        
         if (options.showTooltips) {
-            options.plugins.push(Chartist.plugins.tooltip());
+            // var transFunc = function (value) {console.log(value); return 'hi'};
+            // var textFunc = function (meta, value) {console.log(value); return value.toString()};
+            // options.toolTipOptions.tooltipFnc  = textFunc;
+            // options.toolTipOptions.transformTooltipTextFnc  = transFunc;
+            options.plugins.push(Chartist.plugins.tooltip(options.toolTipOptions));
         }
 
         if (options.showPointLabels) {
@@ -198,6 +207,14 @@
             return Math.abs(Number(value)) >= 1.0e+9 ? Math.abs(Number(value)) / 1.0e+9 + "B" : 
                 Math.abs(Number(value)) >= 1.0e+6 ? Math.abs(Number(value)) / 1.0e+6 + "M" : 
                     Math.abs(Number(value)) >= 1.0e+3 ? Math.abs(Number(value)) / 1.0e+3 + "K" : Math.abs(Number(value));
+        },
+        truncateToKMBCommaSeparated: function (value) {
+            return Math.abs(Number(value)) >= 1.0e+9 ? Math.round(Number(value),0) / 1.0e+9 + "B" :
+                Math.abs(Number(value)) >= 1.0e+6 ? Math.round(Number(value),0) / 1.0e+6 + "M" :
+                    Math.abs(Number(value)) >= 1.0e+3 ? Math.round(Number(value),0)/ 1.0e+3 + "K" : Number(value);
+        },
+        commaSeparated: function (value) {
+            return  Math.round(Number(value),0).toLocaleString()
         },
         noop: Chartist.noop
     }

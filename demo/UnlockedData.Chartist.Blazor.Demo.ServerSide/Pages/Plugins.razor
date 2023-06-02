@@ -20,6 +20,10 @@
             StackMode = StackMode.Accumulate,            
             ShowLegend = true,
             ShowTooltips = true,
+            ToolTipOptions = new ToolTipOptions()
+            {
+                ShowSeriesName = true,
+            },
             ShowPointLabels = true,
             UseZoom = true
 
@@ -29,11 +33,11 @@
         {
             var series = new SeriesData();
             series.Name = "Week 1";
-            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 12, Meta = new PointMetaInfo { Label = "Monday"} });
-            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 9, Meta = new PointMetaInfo{ Label = "Tuesday"}});
-            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 7, Meta = new PointMetaInfo{ Label = "Wednesday"} });
-            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 8, Meta = new PointMetaInfo{ Label = "Thursday"} });
-            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 5, Meta = new PointMetaInfo{ Label = "Friday"} });
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 1000000.22, Meta = new PointMetaInfo { Label = "Monday"} });
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = -500000.111111, Meta = new PointMetaInfo{ Label = "Tuesday"}});
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 90000.11111, Meta = new PointMetaInfo{ Label = "Wednesday"} });
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 9000.111, Meta = new PointMetaInfo{ Label = "Thursday"} });
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 900.111, Meta = new PointMetaInfo{ Label = "Friday"} });
             data.Series.Add(series);
 
             series = new SeriesData();

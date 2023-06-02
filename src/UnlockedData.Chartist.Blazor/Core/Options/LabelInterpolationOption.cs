@@ -3,6 +3,8 @@
     public enum LabelInterpolationOption
     {
         Noop,
-        TruncateToKMB
+        TruncateToKMB,
+        TruncateToKMBCommaSeparated,
+        CommaSeparated,
     }
 }
