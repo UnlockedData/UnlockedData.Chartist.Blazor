@@ -28,17 +28,11 @@
         Data.Labels = Labels ?? Data.Labels;
 
         
-        if (firstRender)
-        {
             _objRef = DotNetObjectReference.Create(this);
             await JS.InvokeVoidAsync("bChartist.createChart", "Line", Elem, Data, Options, _objRef, Id);
-        }
+        
 
-        else
-        {
-            await JS.InvokeVoidAsync("bChartist.updateChart", "Line", Elem, Data, Options);
-        }
-
+   
     }
 
 
