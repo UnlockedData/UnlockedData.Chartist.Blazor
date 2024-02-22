@@ -2,27 +2,41 @@
 
 <h3>Simple Horizontal</h3>
 
-<ChartistBar Data="HorizontalBarData" Options="HorizontalOptions"/>
+<ChartistBar Data="HorizontalBarData" Options="_options" RotateHorizontalLabels="true"/>
 
 @code
 {
     ExtendedChartData HorizontalBarData { get; set; }
 
-    BarOptions HorizontalOptions { get; set; } = new BarOptions {HorizontalBars = true,AxisY = new AxisYOptions(){Offset = 100}};
+    BarOptions _options;
 
     protected override void OnInitialized()
     {
-        HorizontalBarData = new Core.Data.ExtendedChartData()
+
+        _options = new BarOptions
         {
-            Labels = new List<string> {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"}
+            HorizontalBars = true, 
+            ReverseData = true,
+            
+            AxisY = new AxisXOptions()
+            {
+                ShowLabel = true,
+                Offset = 70,
+                Position = LabelPosition.Start,
+            }
+        };
+
+        HorizontalBarData = new ExtendedChartData()
+        {
+            Labels = new List<string> {"A", "E", "X", "T", "R"}
         };
 
         var series = new SeriesData();
-        series.SeriesPoints.Add(new SeriesPoint {X = null, Y = 12, Meta = new PointMetaInfo {Label = "Monday"}});
-        series.SeriesPoints.Add(new SeriesPoint {X = null, Y = 9, Meta = new PointMetaInfo {Label = "Tuesday"}});
-        series.SeriesPoints.Add(new SeriesPoint {X = null, Y = 7, Meta = new PointMetaInfo {Label = "Wednesday"}});
-        series.SeriesPoints.Add(new SeriesPoint {X = null, Y = 8, Meta = new PointMetaInfo {Label = "Thursday"}});
-        series.SeriesPoints.Add(new SeriesPoint {X = null, Y = 5, Meta = new PointMetaInfo {Label = "Friday"}});
+        series.SeriesPoints.Add(new SeriesPoint {X = 12, Meta = new PointMetaInfo {Label = "Monday"}});
+        series.SeriesPoints.Add(new SeriesPoint {X = 9, Meta = new PointMetaInfo {Label = "Tuesday"}});
+        series.SeriesPoints.Add(new SeriesPoint {X = null, Meta = new PointMetaInfo {Label = "Wednesday"}});
+        series.SeriesPoints.Add(new SeriesPoint {X = 8, Meta = new PointMetaInfo {Label = "Thursday"}});
+        series.SeriesPoints.Add(new SeriesPoint {X = 5, Meta = new PointMetaInfo {Label = "Friday"}});
         HorizontalBarData.Series.Add(series);
     }
 

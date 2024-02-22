@@ -1,0 +1,49 @@
+﻿@page "/MultipleBarMissingSets"
+
+<h3>Simple Multiple Bar</h3>
+
+<ChartistBar Options=@_options Labels=@_data.Labels>
+    @foreach (var seriesData in _data.Series)
+    {
+        <BarSeries Name=@seriesData.Name SeriesPoints="seriesData.SeriesPoints" />
+        
+    }
+</ChartistBar>
+
+@code  {              
+        ExtendedChartData _data;       
+       
+        BarOptions _options = new BarOptions();        
+ 
+        protected override void OnInitialized()
+        {
+            
+            _data = new ExtendedChartData()
+            {
+                Labels = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
+            };
+            var series = new SeriesData();
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 12, Meta = new PointMetaInfo { Label = "Monday"} });
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 9, Meta = new PointMetaInfo{ Label = "Tuesday"}});
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 7, Meta = new PointMetaInfo{ Label = "Wednesday"} });
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 8, Meta = new PointMetaInfo{ Label = "Thursday"} });
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 5, Meta = new PointMetaInfo{ Label = "Friday"} });
+            _data.Series.Add(series);
+
+            series = new SeriesData();
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 9, Meta = new PointMetaInfo { Label = "Monday"} });
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = null, Meta = new PointMetaInfo{ Label = ""}});
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = null, Meta = new PointMetaInfo{ Label = "Wednesday"} });
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = 10, Meta = new PointMetaInfo{ Label = ""} });
+            series.SeriesPoints.Add(new SeriesPoint { X = null, Y = null, Meta = new PointMetaInfo{ Label = "Friday"} });
+            _data.Series.Add(series);
+            
+        }
+
+    
+
+      
+
+
+
+    }
