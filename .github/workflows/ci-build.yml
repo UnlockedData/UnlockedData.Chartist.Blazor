@@ -47,3 +47,6 @@ jobs:
       with:
         name: nuget
         path: ${{ github.workspace }}/package
+    - name: Push to NuGet
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/rel/v')
+      run: dotnet nuget push "${{ github.workspace }}/package/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
