@@ -15,10 +15,12 @@ on:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -30,19 +32,20 @@ jobs:
         dotnet-version: |
           9.0.x
           10.0.x
-    - name: Install dependencies
-      run: dotnet restore UnlockedData.Chartist.Blazor.sln
-    - name: ngbv set version
+    - uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: nuget-${{ hashFiles('**/*.csproj') }}
+        restore-keys: nuget-
+    - name: nbgv set version
       uses: dotnet/nbgv@v0.4
       with:
         setAllVars: true
     - run: echo "NBGV_SemVer2 $NBGV_SemVer2"
     - name: Build
-      run: dotnet build UnlockedData.Chartist.Blazor.sln --configuration Release --no-restore
+      run: dotnet build UnlockedData.Chartist.Blazor.sln --configuration Release
     - name: Unit Tests
-      run: dotnet test UnlockedData.Chartist.Blazor.sln --no-restore --verbosity normal
-    - name: Create Package Dir
-      run: mkdir ${{ github.workspace }}/package
+      run: dotnet test UnlockedData.Chartist.Blazor.sln --no-build -c Release --verbosity normal
     - name: Pack
       run: dotnet pack UnlockedData.Chartist.Blazor.sln --no-build -c Release --output "${{ github.workspace }}/package"
     - name: Upload Artifacts
